@@ -1,5 +1,5 @@
 
-// const usr = require("./userfunctions.js");
+const usr = require("./userfunctions.js");
 /* eslint-disable max-len */
 /* global Modernizr */
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
@@ -233,7 +233,6 @@ class Books {
           };
 
           const reverseOrder = function reverseOrder(z) {
-            console.log(z);
             const x = z[1].concat(z[0]);
             return x;
           };

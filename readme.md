@@ -22,7 +22,7 @@ That  is a copy of certain recruitment task, used as a training platform
  - HTML 5.2
  - SASS/SCSS
  - JS
- -
+ - MVC
 
 
 ## Installation
