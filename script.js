@@ -228,15 +228,13 @@ class Books {
           return a.pages - b.pages;
         },
         releaseDate: function releaseDate(a, b) {
-          console.log("sorton releasedate");
           const split = function split(x) {
             return x.releaseDate.split("/");
           };
 
           const reverseOrder = function reverseOrder(z) {
-            console.log("z", z);
             const x = z[1].concat(z[0]);
-            console.log("x", x);
+
             return x;
           };
 
