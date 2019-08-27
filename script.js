@@ -1,5 +1,7 @@
 
-// const usr = require("./userfunctions.js");
+// const config = require("./userfunctions.js");
+
+
 /* eslint-disable max-len */
 /* global Modernizr */
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */

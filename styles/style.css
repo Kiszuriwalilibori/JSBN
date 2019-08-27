@@ -150,6 +150,13 @@
 }
 
 @font-face {
+  font-family: 'cooperlightitalic';
+  src: url("./cooper/cooperhewitt-lightitalic-webfont.woff2") format("woff2"), url("./cooper/cooperhewitt-lightitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'icomoon';
   src: url("./icomoon/fonts/icomoon.eot?jvlpx6");
   src: url("./icomoon/fonts/icomoon.eot?jvlpx6#iefix") format("embedded-opentype"), url("./icomoon/fonts/icomoon.ttf?jvlpx6") format("truetype"), url("./icomoon/fonts/icomoon.woff?jvlpx6") format("woff"), url("./icomoon/fonts/icomoon.svg?jvlpx6#icomoon") format("svg");
@@ -619,7 +626,7 @@ section ol li:before {
 }
 
 .book__details_author {
-  font-family: 'CooperHewittLightItalic';
+  font-family: 'cooperlightitalic';
   font-style: italic;
   font-size: calc(1.1rem * 0.86);
   font-weight: normal;

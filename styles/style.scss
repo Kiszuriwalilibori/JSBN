@@ -195,6 +195,23 @@ $padding576: 6%;
 
   $noBooksModalColor: rgb(154, 152, 166);
   $noBooksModalBorderColor: rgb(111, 106, 136);
+
+
+  @font-face {
+    font-family: 'cooperlightitalic';
+    src: url('./cooper/cooperhewitt-lightitalic-webfont.woff2') format('woff2'),
+         url('./cooper/cooperhewitt-lightitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+
+
+
   
   @font-face {
     font-family: 'icomoon';
@@ -464,7 +481,8 @@ section{
 .book__details{
   line-height:1;
     &_author{
-      font-family: 'CooperHewittLightItalic';
+      //font-family: 'CooperHewittLightItalic';
+      font-family: 'cooperlightitalic';
       font-style: italic;
       font-size: calc(#{$bookTitleFontSize} * 0.86);
       font-weight: normal;
