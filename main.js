@@ -259,6 +259,15 @@ class Books {
     return data;
   }
 
+  ret() {
+    const data = {};
+    data.basicBooks = this.basicBooks.slice();
+    data.processedBooks = this.processedBooks.slice();
+    data.query = Object.assign({}, this.query);
+    return data;
+  }
+
+
   get processedItems() {
     return this.processedBooks.slice();
   }
@@ -410,11 +419,11 @@ class View extends EventEmitter {
 
 class Controller {
   constructor(model, view) {
-    this.model = model;
-    this.view = view;
+    // this.model = model;
+    // this.view = view;
     this.combineHandlers();
   }
-
+console.log(view);
   combineHandlers() {
     view.on("changed_radios", x => model.update(x));
     model.on("loaded", x => view.update(x));

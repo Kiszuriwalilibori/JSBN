@@ -312,11 +312,11 @@ class Model extends EventEmitter {
     this.Books = new Books(data, UserFunctions.name);
     this.Books.processContent();
     this.saveToStorage();
-    this.emit("loaded", this.Books.data);
   }
 }
 //= ==============================================class View===================================================================
 // View in MVC sense
+
 class View extends EventEmitter {
   constructor(nodes, model) {
     super();
@@ -324,8 +324,14 @@ class View extends EventEmitter {
     this.data = model.getProcessedItems();
     this.BooksSection = new Section(model.getProcessedItems(), this.nodes.booksContainer, config.booksSection);
     this.showBooks().mountHandlers(this.nodes);
+    this.query = model.getData().query;
+    this.setFilters();
+  }
 
-    // gdzieś na początku tutaj trzaby zredefiniowac addeventlistener w ten sposób, żeby był zależny od przeglądarki Stefanov 263 leniwe definiowanie ale w sumie caniuse pokazuje prawi wszystkie
+  setFilters() {
+    this.nodes.pageQueryInput.value = this.query.filter;
+    const sort_node = document.getElementById(this.query.sort);
+    sort_node.setAttribute("checked", true);
   }
 
   resetFilters() {
@@ -339,7 +345,6 @@ class View extends EventEmitter {
 
     const filteredRadio = this.nodes.radio.filter(element => (!!element.checked));
     Queries.sort = filteredRadio.length > 0 ? filteredRadio[0].value : null;
-
     return Queries;
   }
 
@@ -386,9 +391,7 @@ class View extends EventEmitter {
 
   update(data) {
     this.BooksSection.clear();
-
     this.BooksSection = new Section(data.processedBooks, this.nodes.booksContainer, config.booksSection);
-
     this.BooksSection.create();
     this.nodes.pageQueryInput.value = data.query.filter;
     this.mountModalTriggers();

@@ -553,7 +553,7 @@ aside{
   text-align:center;
    @include multiBreakPoint($breakPoints,'width', $pageQueryButtonX );
    @include multiBreakPoint($breakPoints,'height', $pageQueryButtonY );
-
+  &:focus{outline: none};
 }
 
 .resetButton{

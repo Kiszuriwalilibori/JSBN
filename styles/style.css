@@ -788,6 +788,10 @@ aside h2:last-of-type {
   }
 }
 
+.pageQueryInput:focus {
+  outline: none;
+}
+
 .resetButton {
   font-weight: bold;
   color: white;
