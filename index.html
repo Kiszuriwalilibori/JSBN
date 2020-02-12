@@ -7,7 +7,7 @@
     <meta name="description" content="Javascriptowe książki">
     <title>Javascriptove ksiązki</title>
     <script src="./modernizr-custom.js"></script>
-    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700" rel="stylesheet">
     <link rel="Stylesheet" href="./styles/style.css">
 
     <title>Document</title>
@@ -23,9 +23,9 @@
             <form id = 'queryForm' name = 'input' >
                 <h2>Sortuj po</h2>
                 <ul id='radioInputs'>
-                    <li><input label = 'pages' id ='pages' name = 'sort' type="radio" value ='pages'> ilości stron</li>
-                    <li><input label = 'releaseDate'id = 'releaseDate'  name = 'sort' type="radio" value ='releaseDate'> dacie wydania</li>
-                    <li><input label = 'author' id = 'author' name = 'sort' type="radio" value ='author'> nazwisku autora</li> 
+                    <li><input id ='pages' name = 'sort' type="radio" value ='pages'><label for ='pages'>ilości stron</label> </li>
+                    <li><input id = 'releaseDate'  name = 'sort' type="radio" value ='releaseDate'> <label for='releaseDate'>dacie wydania</label></li>
+                    <li><input id = 'author' name = 'sort' type="radio" value ='author'> <label for='author'>nazwisku autora</label></li> 
                 </ul>
                 <h2><span>Pokaż tylko</span></h2>
                 <ul id='textInput' data-tooltip = 'Nacisnij ENTER aby wyszukać' >
