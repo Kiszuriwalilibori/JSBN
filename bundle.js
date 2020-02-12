@@ -1,84 +1,58 @@
-
-const usr = require("./userfunctions.js");
-/* eslint-disable max-len */
-/* global Modernizr */
-/* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+// this object holds configuration data used by instantions of Modal and Section classes
 
 
-//  Przy montowaniu handlerów do instancji powinna się tworzyć jakaś ich tablica, po której je by można potem udmontować
+const UserFunctions = require("./userfunctions.js");
 
-// właściwie modal jest implementowany przez HTML 5.2 można by skorzystać
+module.exports = {
 
-
-const UserFunctions = (function () {
-  return {
-    name: {
-      getSurname: function getSurname(str) {
-        const lastspace = function lastspace(x) {
-          return x.lastIndexOf(" ");
-        };
-
-        return lastspace(str) === -1 ? str : str.slice(lastspace(str) + 1);
-      },
-      getFirstname: function getFirstname(str) {
-        const lastspace = function lastspace(y) {
-          return y.lastIndexOf(" ");
-        };
-
-        return lastspace(str) === -1 ? str : str.slice(0, lastspace(str));
-      },
-      processedFirstName: function processedFirstName(str) {
-        return `By ${this.getFirstname(str)}`;
-      },
+  booksSection: {
+    type: "li",
+    classes: ["book"],
+    attributes: {
+      itemtype: "http://schema.org/Book",
+      itemscope: "",
     },
-  };
-}());
-
-
-// ========================================================== config objects ===================================================================
-// this object collects data taken by instantions of Modal and Section classes
-const config = {};
-config.booksSection = {
-  type: "li",
-  classes: ["book"],
-  attributes: {
-    itemtype: "http://schema.org/Book",
-    itemscope: "",
+    dataset: {
+      number: null,
+    },
+    innerHTMLcreator: function createItem(bookObject, functionObj) {
+      return "\n <a class = 'book__cover'  data-href = ".concat(bookObject.cover.large, ">\n <img itemprop = 'image' class='book__cover__image fadein' src=").concat(bookObject.cover.small, ">\n                                    </a>\n                                    <div class='bookInfo'>\n                                        <div class='bookInfo__titleContainer'>\n                                            <p class= 'bookInfo__title' itemprop ='name'>").concat(bookObject.title, "</p>\n                                           \n                                            \n                                        </div>\n                                        <div class='book__details'>\n                                            <p itemprop ='author' class= \"book__details_author\"><span> ").concat(functionObj.processedFirstName(bookObject.author), "</span> ")
+        .concat(functionObj.getSurname(bookObject.author), "</p>\n <p itemprop ='datePublished'><span>Release Date:</span> ")
+        .concat(bookObject.releaseDate, "</p>\n  <p itemprop = 'numberOfPages'><span>Pages:</span> ")
+        .concat(bookObject.pages, "</p>\n <p itemprop ='discussionUrl'><span>Link:</span> <a href = ")
+        .concat(bookObject.link, ">shop</a></p>\n  </div>\n </div>\n    \n    \n  ");
+    },
+    extraFunction: UserFunctions.name,
   },
-  dataset: {
-    number: null,
-  },
-  innerHTMLcreator: function createItem(bookObject, functionObj) {
-    return "\n <a class = 'book__cover'  data-href = ".concat(bookObject.cover.large, ">\n <img itemprop = 'image' class='book__cover__image fadein' src=").concat(bookObject.cover.small, ">\n                                    </a>\n                                    <div class='bookInfo'>\n                                        <div class='bookInfo__titleContainer'>\n                                            <p class= 'bookInfo__title' itemprop ='name'>").concat(bookObject.title, "</p>\n                                           \n                                            \n                                        </div>\n                                        <div class='book__details'>\n                                            <p itemprop ='author' class= \"book__details_author\"><span> ").concat(functionObj.processedFirstName(bookObject.author), "</span> ")
-      .concat(functionObj.getSurname(bookObject.author), "</p>\n <p itemprop ='datePublished'><span>Release Date:</span> ")
-      .concat(bookObject.releaseDate, "</p>\n  <p itemprop = 'numberOfPages'><span>Pages:</span> ")
-      .concat(bookObject.pages, "</p>\n <p itemprop ='discussionUrl'><span>Link:</span> <a href = ")
-      .concat(bookObject.link, ">shop</a></p>\n  </div>\n </div>\n    \n    \n  ");
-  },
-  extraFunction: UserFunctions.name,
-};
-config.noBooksModal = {
+  noBooksModal: {
 
-  type: "div",
-  classes: ["noBooksModal__content"],
-  attributes: {
-    id: "noBooksModal-content",
-  },
-  innerHTMLcreator: function createItem() { return "<span id ='closeNoBooksScreen' class='noBooksModal__close'>&times;</span><div><span>Nie znaleziono przedmiotów </span><br><span>spełniających kryteria wyszukiwania</span></div>"; },
-};
-
-
-config.modal = {
-
-  type: "div",
-  classes: ["myModal__content"],
-  attributes: {
-    id: "myModal-content",
+    type: "div",
+    classes: ["noBooksModal__content"],
+    attributes: {
+      id: "noBooksModal-content",
+    },
+    innerHTMLcreator: function createItem() { return "<span id ='closeNoBooksScreen' class='noBooksModal__close'>&times;</span><div><span>Nie znaleziono przedmiotów </span><br><span>spełniających kryteria wyszukiwania</span></div>"; },
   },
 
-  innerHTMLcreator: function createItem() { const src = (this.target).dataset.href; return "<span id ='close' class=\"myModal__close icon-circle-regular icon-times-solid \"> </span><img  class = 'myModal__image' src=".concat(src, "></img>"); },
+
+  modal: {
+
+    type: "div",
+    classes: ["myModal__content"],
+    attributes: {
+      id: "myModal-content",
+    },
+
+    innerHTMLcreator: function createItem() { const src = (this.target).dataset.href; return "<span id ='close' class=\"myModal__close icon-circle-regular icon-times-solid \"> </span><img  class = 'myModal__image' src=".concat(src, "></img>"); },
+  },
+
 };
 
+},{"./userfunctions.js":3}],2:[function(require,module,exports){
+
+const UserFunctions = require("./userfunctions.js");
+const config = require("./config.js");
 
 //= ========== Event Emitter ===============================
 
@@ -98,7 +72,7 @@ class EventEmitter {
 }
 
 //  ========== Class nodeMaker =======================================
-//  this class supplies few methods that are later on implemented by its children classes
+//  this class supplies few methods that are later on implemented by classes Modal and Section
 class nodeMaker {
   constructor(location, cnfg) { this.location = location; this.config = cnfg; this.el = null; }
 
@@ -170,7 +144,11 @@ class Section extends nodeMaker {
 
         const el = this.createNode();
         el.innerHTML = this.config.innerHTMLcreator(item, this.name);
+       // console.log(index);
+        
         this.appendNode(el);
+        if ((index +1 )%3 == 0){ const x = document.createElement("P"); console.log(document.getElementById('booksContainer')); document.getElementById("booksContainer").appendChild(x)}
+       
       });
     }
   }
@@ -234,6 +212,7 @@ class Books {
 
           const reverseOrder = function reverseOrder(z) {
             const x = z[1].concat(z[0]);
+
             return x;
           };
 
@@ -258,15 +237,6 @@ class Books {
     data.query = Object.assign({}, this.query);
     return data;
   }
-
-  ret() {
-    const data = {};
-    data.basicBooks = this.basicBooks.slice();
-    data.processedBooks = this.processedBooks.slice();
-    data.query = Object.assign({}, this.query);
-    return data;
-  }
-
 
   get processedItems() {
     return this.processedBooks.slice();
@@ -318,11 +288,11 @@ class Model extends EventEmitter {
     this.Books = new Books(data, UserFunctions.name);
     this.Books.processContent();
     this.saveToStorage();
-    this.emit("loaded", this.Books.data);
   }
 }
 //= ==============================================class View===================================================================
 // View in MVC sense
+
 class View extends EventEmitter {
   constructor(nodes, model) {
     super();
@@ -330,8 +300,14 @@ class View extends EventEmitter {
     this.data = model.getProcessedItems();
     this.BooksSection = new Section(model.getProcessedItems(), this.nodes.booksContainer, config.booksSection);
     this.showBooks().mountHandlers(this.nodes);
+    this.query = model.getData().query;
+    this.setFilters();
+  }
 
-    // gdzieś na początku tutaj trzaby zredefiniowac addeventlistener w ten sposób, żeby był zależny od przeglądarki Stefanov 263 leniwe definiowanie ale w sumie caniuse pokazuje prawi wszystkie
+  setFilters() {
+    this.nodes.pageQueryInput.value = this.query.filter;
+    const sort_node = document.getElementById(this.query.sort);
+    if (sort_node) { sort_node.setAttribute("checked", true); }
   }
 
   resetFilters() {
@@ -345,7 +321,6 @@ class View extends EventEmitter {
 
     const filteredRadio = this.nodes.radio.filter(element => (!!element.checked));
     Queries.sort = filteredRadio.length > 0 ? filteredRadio[0].value : null;
-
     return Queries;
   }
 
@@ -392,9 +367,7 @@ class View extends EventEmitter {
 
   update(data) {
     this.BooksSection.clear();
-
     this.BooksSection = new Section(data.processedBooks, this.nodes.booksContainer, config.booksSection);
-
     this.BooksSection.create();
     this.nodes.pageQueryInput.value = data.query.filter;
     this.mountModalTriggers();
@@ -419,11 +392,11 @@ class View extends EventEmitter {
 
 class Controller {
   constructor(model, view) {
-    // this.model = model;
-    // this.view = view;
+    this.model = model;
+    this.view = view;
     this.combineHandlers();
   }
-console.log(view);
+
   combineHandlers() {
     view.on("changed_radios", x => model.update(x));
     model.on("loaded", x => view.update(x));
@@ -488,6 +461,7 @@ function initializer(storageLocation, remoteLocation) {
     model = new Model(storage, storageLocation);
     view = new View(pageNodes, model);
     controller = new Controller(model, view);
+    
   }
 }
 
@@ -501,3 +475,30 @@ async function remoteLoad(remote, storage, nodes) {
     return resp;
   } catch (e) { console.log(e); }
 }
+
+},{"./config.js":1,"./userfunctions.js":3}],3:[function(require,module,exports){
+// various functions used elesewhere in application
+
+module.exports = {
+  name: {
+    getSurname: function getSurname(str) {
+      const lastspace = function lastspace(x) {
+        return x.lastIndexOf(" ");
+      };
+
+      return lastspace(str) === -1 ? str : str.slice(lastspace(str) + 1);
+    },
+    getFirstname: function getFirstname(str) {
+      const lastspace = function lastspace(y) {
+        return y.lastIndexOf(" ");
+      };
+
+      return lastspace(str) === -1 ? str : str.slice(0, lastspace(str));
+    },
+    processedFirstName: function processedFirstName(str) {
+      return `By ${this.getFirstname(str)}`;
+    },
+  },
+};
+
+},{}]},{},[2]);

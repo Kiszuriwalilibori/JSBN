@@ -1,7 +1,4 @@
 
-// troche lżejsze nunito na dole
-//czerwona granica jest o literę od dołu a powinna być o pól
-
 * {
   margin-top: 0;
   margin-bottom: 0;
@@ -203,15 +200,9 @@ $padding576: 6%;
          url('./cooper/cooperhewitt-lightitalic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 
 }
-
-
-
-
-
-
-
   
   @font-face {
     font-family: 'icomoon';
@@ -222,8 +213,24 @@ $padding576: 6%;
       url('./icomoon/fonts/icomoon.svg?jvlpx6#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
   
+
+
+  @font-face {
+    font-family: 'Nunito Sans';
+    src: url('./nunito/fonts/nunitosans-bold-webfont.woff2') format('woff2'),
+         url('./nunito/fonts/nunitosans-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+
   [class^="icon-"], [class*=" icon-"] {
     font-family: 'icomoon' !important;
     font-style: normal;

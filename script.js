@@ -1,86 +1,6 @@
 
-// const config = require("./userfunctions.js");
-
-
-/* eslint-disable max-len */
-/* global Modernizr */
-/* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }] */
-
-
-//  Przy montowaniu handlerów do instancji powinna się tworzyć jakaś ich tablica, po której je by można potem udmontować
-
-// właściwie modal jest implementowany przez HTML 5.2 można by skorzystać
-
-
-const UserFunctions = (function () {
-  return {
-    name: {
-      getSurname: function getSurname(str) {
-        const lastspace = function lastspace(x) {
-          return x.lastIndexOf(" ");
-        };
-
-        return lastspace(str) === -1 ? str : str.slice(lastspace(str) + 1);
-      },
-      getFirstname: function getFirstname(str) {
-        const lastspace = function lastspace(y) {
-          return y.lastIndexOf(" ");
-        };
-
-        return lastspace(str) === -1 ? str : str.slice(0, lastspace(str));
-      },
-      processedFirstName: function processedFirstName(str) {
-        return `By ${this.getFirstname(str)}`;
-      },
-    },
-  };
-}());
-
-
-// ========================================================== config objects ===================================================================
-// this object collects data taken by instantions of Modal and Section classes
-const config = {};
-config.booksSection = {
-  type: "li",
-  classes: ["book"],
-  attributes: {
-    itemtype: "http://schema.org/Book",
-    itemscope: "",
-  },
-  dataset: {
-    number: null,
-  },
-  innerHTMLcreator: function createItem(bookObject, functionObj) {
-    return "\n <a class = 'book__cover'  data-href = ".concat(bookObject.cover.large, ">\n <img itemprop = 'image' class='book__cover__image fadein' src=").concat(bookObject.cover.small, ">\n                                    </a>\n                                    <div class='bookInfo'>\n                                        <div class='bookInfo__titleContainer'>\n                                            <p class= 'bookInfo__title' itemprop ='name'>").concat(bookObject.title, "</p>\n                                           \n                                            \n                                        </div>\n                                        <div class='book__details'>\n                                            <p itemprop ='author' class= \"book__details_author\"><span> ").concat(functionObj.processedFirstName(bookObject.author), "</span> ")
-      .concat(functionObj.getSurname(bookObject.author), "</p>\n <p itemprop ='datePublished'><span>Release Date:</span> ")
-      .concat(bookObject.releaseDate, "</p>\n  <p itemprop = 'numberOfPages'><span>Pages:</span> ")
-      .concat(bookObject.pages, "</p>\n <p itemprop ='discussionUrl'><span>Link:</span> <a href = ")
-      .concat(bookObject.link, ">shop</a></p>\n  </div>\n </div>\n    \n    \n  ");
-  },
-  extraFunction: UserFunctions.name,
-};
-config.noBooksModal = {
-
-  type: "div",
-  classes: ["noBooksModal__content"],
-  attributes: {
-    id: "noBooksModal-content",
-  },
-  innerHTMLcreator: function createItem() { return "<span id ='closeNoBooksScreen' class='noBooksModal__close'>&times;</span><div><span>Nie znaleziono przedmiotów </span><br><span>spełniających kryteria wyszukiwania</span></div>"; },
-};
-
-
-config.modal = {
-
-  type: "div",
-  classes: ["myModal__content"],
-  attributes: {
-    id: "myModal-content",
-  },
-
-  innerHTMLcreator: function createItem() { const src = (this.target).dataset.href; return "<span id ='close' class=\"myModal__close icon-circle-regular icon-times-solid \"> </span><img  class = 'myModal__image' src=".concat(src, "></img>"); },
-};
-
+const UserFunctions = require("./userfunctions.js");
+const config = require("./config.js");
 
 //= ========== Event Emitter ===============================
 
@@ -100,7 +20,7 @@ class EventEmitter {
 }
 
 //  ========== Class nodeMaker =======================================
-//  this class supplies few methods that are later on implemented by its children classes
+//  this class supplies few methods that are later on implemented by classes Modal and Section
 class nodeMaker {
   constructor(location, cnfg) { this.location = location; this.config = cnfg; this.el = null; }
 
@@ -172,7 +92,11 @@ class Section extends nodeMaker {
 
         const el = this.createNode();
         el.innerHTML = this.config.innerHTMLcreator(item, this.name);
+       // console.log(index);
+        
         this.appendNode(el);
+        //if ((index +1 )%3 == 0){ const x = document.createElement("P"); console.log(document.getElementById('booksContainer')); document.getElementById("booksContainer").appendChild(x)}
+       
       });
     }
   }
@@ -331,7 +255,7 @@ class View extends EventEmitter {
   setFilters() {
     this.nodes.pageQueryInput.value = this.query.filter;
     const sort_node = document.getElementById(this.query.sort);
-    sort_node.setAttribute("checked", true);
+    if (sort_node) { sort_node.setAttribute("checked", true); }
   }
 
   resetFilters() {
@@ -485,6 +409,7 @@ function initializer(storageLocation, remoteLocation) {
     model = new Model(storage, storageLocation);
     view = new View(pageNodes, model);
     controller = new Controller(model, view);
+    
   }
 }
 
