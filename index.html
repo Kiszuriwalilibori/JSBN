@@ -23,13 +23,13 @@
             <form id = 'queryForm' name = 'input' >
                 <h2>Sortuj po</h2>
                 <ul id='radioInputs'>
-                    <li><input id ='pages' name = 'sort' type="radio" value ='pages'> ilości stron</li>
-                    <li><input id = 'releaseDate'  name = 'sort' type="radio" value ='releaseDate'> dacie wydania</li>
-                    <li><input id = 'author' name = 'sort' type="radio" value ='author'> nazwisku autora</li> 
+                    <li><input label = 'pages' id ='pages' name = 'sort' type="radio" value ='pages'> ilości stron</li>
+                    <li><input label = 'releaseDate'id = 'releaseDate'  name = 'sort' type="radio" value ='releaseDate'> dacie wydania</li>
+                    <li><input label = 'author' id = 'author' name = 'sort' type="radio" value ='author'> nazwisku autora</li> 
                 </ul>
                 <h2><span>Pokaż tylko</span></h2>
                 <ul id='textInput' data-tooltip = 'Nacisnij ENTER aby wyszukać' >
-                    <li>Powyżej <input data-tooltip = 'Naciśnij ENTER aby wyszukać' pattern="[0-9]+" class = 'pageQueryInput' name ='textInput' id='pageQueryInput' type="text"> stron</li>
+                    <li>Powyżej <input label = 'pageQuery' data-tooltip = 'Naciśnij ENTER aby wyszukać' pattern="[0-9]+" class = 'pageQueryInput' name ='textInput' id='pageQueryInput' type="text"> stron</li>
                 </ul>
                 <button id ='resetButton' class="resetButton hvr-pulse-grow" type ='reset'  >Wyczyść</button>
             </form>
