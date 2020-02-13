@@ -491,13 +491,13 @@ section ol li {
   }
 }
 
-@media screen and (min-width: 576px) and (max-width: 767px) {
+@media screen and (min-width: 551px) and (max-width: 767px) {
   section ol li {
     width: 49.9%;
   }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 550px) {
   section ol li {
     width: 100%;
     margin: 1.8vw 0;
@@ -514,7 +514,7 @@ section ol li:before {
   top: 1rem;
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 550px) {
   section ol li:before {
     left: -1rem;
     top: -5.5rem;
@@ -644,11 +644,17 @@ section ol li:before {
 
 .book__details :not(:first-child) {
   color: #ADADAD;
-  font-size: calc(1.1rem * 0.74);
+  font-size: calc(1.1rem * 0.77);
   letter-spacing: -0.02rem;
   line-height: 1.15;
   font-style: italic;
   margin-bottom: 0;
+}
+
+@media screen and (max-width: 4700px) {
+  .book__details :not(:first-child) {
+    font-size: 12px;
+  }
 }
 
 .book__details :not(:first-child) span {
@@ -721,11 +727,15 @@ aside ul {
   list-style: none;
   padding: 0.5rem 0 1.0rem 0;
   margin-bottom: 0;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 4px;
   border-bottom: 1px solid #ADADAD;
 }
 
 aside ul li {
   line-height: 1.2rem;
+  height: 1.2rem;
   font-size: 0.8rem;
   font-size: calc(1.1rem * 0.8);
   display: -webkit-box;
@@ -734,6 +744,12 @@ aside ul li {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media screen and (max-width: 448px) {
+  aside ul li {
+    font-size: 12px;
+  }
 }
 
 aside h2:last-of-type {

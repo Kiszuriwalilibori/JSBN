@@ -171,7 +171,8 @@ $padding576: 6%;
   @mixin smallText {
    
     color: $grey;
-    font-size: calc(#{$bookTitleFontSize} * 0.74);
+    font-size: calc(#{$bookTitleFontSize} * 0.77);
+    @media screen and (max-width: 4700px) {font-size: 12px;}
     letter-spacing: -0.02rem;
     line-height: 1.15;
     font-style: italic;
@@ -257,7 +258,6 @@ $padding576: 6%;
     bottom: 1rem;
     position: absolute;
     color:black;
-  
   
   }
   /*Modal with small image */
@@ -421,9 +421,8 @@ section{
           
             @media screen and (min-width: 1025px) {min-width:  calc(#{$imageLength} * 1.74)}
             @media screen and (min-width: 768px) and (max-width: 1024px) {width: 49.9%;};
-            @media screen and (min-width: 576px)and (max-width: 767px) {width: 49.9%;};
-            @media screen and (max-width: 575px) {width: 100%; margin: 1.8vw 0}
-          
+            @media screen and (min-width: 551px)and (max-width: 767px) {width: 49.9%;};
+            @media screen and (max-width: 550px) {width: 100%; margin: 1.8vw 0}
                 &:before {
           
                   content: attr(data-number);
@@ -433,7 +432,7 @@ section{
                   position:relative;
                   left: -40%;
                   top: 1rem;
-                  @media screen and (max-width: 575px) {left: -1rem; top: -5.5rem}
+                  @media screen and (max-width: 550px) {left: -1rem; top: -5.5rem}
               
                 }
           
@@ -469,6 +468,7 @@ section{
         margin: auto;
         background-color: red;
         @include multiBreakPoint($breakPoints, 'width', $redUnderLineX);
+
       }
     }
 
@@ -537,14 +537,19 @@ aside{
       list-style:none;
       padding: 0.5rem 0 1.0rem 0;
       margin-bottom: 0;
+      display: grid;
+      grid-gap: 4px;
       @include formBorder;
      
-      li{line-height:1.2rem;
-     
+      li{
+      line-height:1.2rem;
+      height:1.2rem;
       font-size: 0.8rem;
       font-size: calc(#{$bookTitleFontSize} * 0.8);
+      @media screen and (max-width: 448px) {font-size: 12px;}
       display:flex;
       align-items: center;
+        
       }
     }
    h2:last-of-type{padding-top: 1rem;}
