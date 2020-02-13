@@ -4,7 +4,7 @@
   margin-bottom: 0;
   box-sizing: border-box;
 }
-
+$greenish: #00A9A7;
 $grey : #ADADAD;
 $yellow :  	#F7DA3E;
 $numbercolor: #DADADA;
@@ -170,7 +170,8 @@ $padding576: 6%;
   
   @mixin smallText {
    
-    color: $grey;
+    // color: $grey;
+    color: $greenish;
     font-size: calc(#{$bookTitleFontSize} * 0.77);
     @media screen and (max-width: 4700px) {font-size: 12px;}
     letter-spacing: -0.02rem;
@@ -426,7 +427,8 @@ section{
                 &:before {
           
                   content: attr(data-number);
-                  color: $numbercolor;
+                  // color: $numbercolor;
+                  color: $greenish;
                   font-size: 3.1rem;
                   display: block;
                   position:relative;
@@ -572,6 +574,7 @@ aside{
   font-weight: bold;
   color:white;
   background-color: $buttongrey;
+  background-color: $greenish;
   border:none;
   display:block;
   border-radius:0.25rem;

@@ -506,7 +506,7 @@ section ol li {
 
 section ol li:before {
   content: attr(data-number);
-  color: #DADADA;
+  color: #00A9A7;
   font-size: 3.1rem;
   display: block;
   position: relative;
@@ -643,7 +643,7 @@ section ol li:before {
 }
 
 .book__details :not(:first-child) {
-  color: #ADADAD;
+  color: #00A9A7;
   font-size: calc(1.1rem * 0.77);
   letter-spacing: -0.02rem;
   line-height: 1.15;
@@ -820,6 +820,7 @@ aside h2:last-of-type {
   font-weight: bold;
   color: white;
   background-color: #AAAAAA;
+  background-color: #00A9A7;
   border: none;
   display: block;
   border-radius: 0.25rem;
