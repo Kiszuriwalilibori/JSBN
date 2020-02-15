@@ -166,6 +166,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url("./nunito/Nunito-Bold.ttf") format("truetype");
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
 [class^="icon-"], [class*=" icon-"] {
   font-family: 'icomoon' !important;
   font-style: normal;
@@ -628,7 +636,6 @@ section ol li:before {
 }
 
 .book__details_author {
-  font-family: 'cooperlightitalic';
   font-style: italic;
   font-size: calc(1.1rem * 0.86);
   font-weight: normal;
@@ -754,6 +761,12 @@ aside ul li {
 
 aside h2:last-of-type {
   padding-top: 1rem;
+}
+
+.queryForm__pageLimit {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 10px;
 }
 
 .pageQueryInput {

@@ -4,6 +4,7 @@
   margin-bottom: 0;
   box-sizing: border-box;
 }
+
 $greenish: #00A9A7;
 $grey : #ADADAD;
 $yellow :  	#F7DA3E;
@@ -219,6 +220,7 @@ $padding576: 6%;
   
 
 
+
 //   @font-face {
 //     font-family: 'Nunito Sans';
 //     src: url('./nunito/fonts/nunitosans-bold-webfont.woff2') format('woff2'),
@@ -229,6 +231,14 @@ $padding576: 6%;
 // }
 
 
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('./nunito/Nunito-Bold.ttf') format('truetype');
+    font-display: swap;    
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 
 
@@ -488,8 +498,7 @@ section{
 .book__details{
   line-height:1;
     &_author{
-      //font-family: 'CooperHewittLightItalic';
-      font-family: 'cooperlightitalic';
+      // font-family: 'cooperlightitalic';
       font-style: italic;
       font-size: calc(#{$bookTitleFontSize} * 0.86);
       font-weight: normal;
@@ -558,7 +567,8 @@ aside{
 
 
 }
- 
+.queryForm__pageLimit{display: grid; grid-gap:10px;}
+
 .pageQueryInput{
   margin: 0.5rem 0.2rem; 
   border:none; 

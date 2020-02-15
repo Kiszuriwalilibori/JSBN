@@ -15,7 +15,8 @@ That  is a copy of certain recruitment task, used as a training platform
 
 ## Features
  - That app displays list of books and permits typical operations (filtering, sorting)
- - It stores some data in session storage so that after page reload one gets picture as from before reloading
+ - It stores some data in session storage so that after page reload one gets picture as from before     reloading
+ - The app is deliberately written in pure js -firstly, it was requested by other party, secondly -     it was a good opportunity to learn crud MVC
  
 
 ## Technologies
