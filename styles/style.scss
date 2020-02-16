@@ -571,7 +571,12 @@ aside{
 
 }
 
-aside #textInput{ @media screen and (max-width: 760px) {grid-template-columns: 1fr;justify-items:center;}}
+aside #textInput{ @media screen and (max-width: 760px) {
+  grid-template-columns: 1fr;
+  justify-items: center;}
+  li{margin-bottom: 0.5rem;}
+
+}
 .queryForm__pageLimit{display: grid; grid-gap:10px;}
 
 .pageQueryInput{
