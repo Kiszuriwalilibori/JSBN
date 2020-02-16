@@ -11,10 +11,10 @@
             transform: scale(1.1);
   }
   0% {
-    background-color: dodgerblue;
+    background-color: #00A9A7;
   }
   100% {
-    background-color: #062e57;
+    background-color: green;
   }
 }
 
@@ -24,10 +24,10 @@
             transform: scale(1.1);
   }
   0% {
-    background-color: dodgerblue;
+    background-color: #00A9A7;
   }
   100% {
-    background-color: #062e57;
+    background-color: green;
   }
 }
 
@@ -740,6 +740,13 @@ aside ul {
   border-bottom: 1px solid #ADADAD;
 }
 
+@media screen and (max-width: 760px) {
+  aside ul {
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 aside ul li {
   line-height: 1.2rem;
   height: 1.2rem;
@@ -761,6 +768,14 @@ aside ul li {
 
 aside h2:last-of-type {
   padding-top: 1rem;
+}
+
+@media screen and (max-width: 760px) {
+  aside #textInput {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    justify-items: center;
+  }
 }
 
 .queryForm__pageLimit {

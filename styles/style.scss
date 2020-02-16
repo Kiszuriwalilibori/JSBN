@@ -44,9 +44,9 @@ $padding576: 6%;
   
     transform: scale(1.1);
   }
-  0% {background-color: dodgerblue; }
+  0% {background-color: $greenish; }
   
-  100% { background-color: rgb(6, 46, 87); }
+  100% { background-color: green; }
 
 }
 .hvr-pulse-grow {
@@ -551,6 +551,8 @@ aside{
       display: grid;
       grid-gap: 4px;
       @include formBorder;
+      @media screen and (max-width: 760px) {grid-template-columns: 1fr 1fr 1fr;}
+
      
       li{
       line-height:1.2rem;
@@ -563,10 +565,13 @@ aside{
         
       }
     }
+
    h2:last-of-type{padding-top: 1rem;}
 
 
 }
+
+aside #textInput{ @media screen and (max-width: 760px) {grid-template-columns: 1fr;justify-items:center;}}
 .queryForm__pageLimit{display: grid; grid-gap:10px;}
 
 .pageQueryInput{
