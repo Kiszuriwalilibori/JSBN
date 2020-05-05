@@ -1,0 +1,82 @@
+
+  /*Modal with small image */
+  .myModal{
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.8);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .myModal__content {
+    background-color: transparent;
+    width: calc(200px + 300 * (100vw - 320px) / 1360);
+   
+  }
+  .myModal__image {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* The Close Button on imoge modal */
+  .myModal__close{
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: 900;
+    position: relative;
+  
+    &:hover,
+    :focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  
+  }
+  
+  .noBooksModal__close{
+    color: red;
+    font-size: 4vw;
+    font-weight: 900;
+    cursor:pointer;
+  }
+  
+  .noBooksModal__content {
+    background-color: $noBooksModalColor;
+    border: solid 3px $noBooksModalBorderColor;
+    color: white;
+    width: calc(200px + 300 * (100vw - 320px) / 1360);
+    text-align: center;
+    border-radius: 0.3rem;
+    box-shadow:0 1px 1px rgba(0,0,0,0.11), 
+    0 2px 2px rgba(0,0,0,0.11), 
+    0 4px 4px rgba(0,0,0,0.11), 
+    0 8px 8px rgba(0,0,0,0.11), 
+    0 16px 16px rgba(0,0,0,0.11), 
+    0 32px 32px rgba(0,0,0,0.11);
+    & div{padding:10% 0;}
+  
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'cooperlightitalic';
+  src: url("./cooper/cooperhewitt-lightitalic-webfont.woff2") format("woff2"), url("./cooper/cooperhewitt-lightitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("./icomoon/fonts/icomoon.eot?jvlpx6");
+  src: url("./icomoon/fonts/icomoon.eot?jvlpx6#iefix") format("embedded-opentype"), url("./icomoon/fonts/icomoon.ttf?jvlpx6") format("truetype"), url("./icomoon/fonts/icomoon.woff?jvlpx6") format("woff"), url("./icomoon/fonts/icomoon.svg?jvlpx6#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url("./nunito/Nunito-Bold.ttf") format("truetype");
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  font-weight: lighter;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-circle-regular:before {
+  content: "\e900";
+  position: relative;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  position: absolute;
+  text-shadow: none;
+  font: weight 100;
+  font-size: 3rem;
+}
+
+.icon-times-solid:after {
+  content: "\e901";
+  left: 1.35rem;
+  bottom: 1rem;
+  position: absolute;
+  color: black;
+}
+/*# sourceMappingURL=fonts&details.css.map */

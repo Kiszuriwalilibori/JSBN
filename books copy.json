@@ -1,0 +1,33 @@
+
+
+    [
+          {
+             "cover":{
+                "large":"https://covers.oreillystatic.com/images/9780596517748/lrg.jpg",
+                "small":"https://covers.oreillystatic.com/images/9780596517748/cat.gif"
+             
+    },
+             "author":"Douglas Crockford",
+             "title":"Java Script: The Good parts",
+             "releaseDate":"12/2008",
+             "pages":172,
+             "link":"http://shop.oreilly.com/product/9780596517748.do"
+          
+    },
+          {
+             "cover":{
+                "large":"https://covers.oreillystatic.com/images/9780596805531/lrg.jpg",
+                "small":"https://covers.oreillystatic.com/images/9780596805531/cat.gif"
+             
+    },
+             "author":"David Flanagan",
+             "title":"Java Script: The Definitive Guide",
+             "releaseDate":"11/2011",
+             "pages":1096,
+             "link":"http://shop.oreilly.com/product/9780596517748.do"
+          
+    }
+       
+    ]
+
+

@@ -1,0 +1,86 @@
+
+
+    [
+          {
+             "cover":{
+                "large":"https://covers.oreillystatic.com/images/9780596517748/lrg.jpg",
+                "small":"https://covers.oreillystatic.com/images/9780596517748/cat.gif"
+             
+    },
+             "author":"Douglas Crockford",
+             "title":"Java Script: The Good parts",
+             "releaseDate":"12/2008",
+             "pages":172,
+             "link":"http://shop.oreilly.com/product/9780596517748.do"
+          
+    },
+          {
+             "cover":{
+                "large":"https://covers.oreillystatic.com/images/9780596805531/lrg.jpg",
+                "small":"https://covers.oreillystatic.com/images/9780596805531/cat.gif"
+             
+    },
+             "author":"David Flanagan",
+             "title":"Java Script: The Definitive Guide",
+             "releaseDate":"11/2011",
+             "pages":1096,
+             "link":"http://shop.oreilly.com/product/9780596517748.do"
+          
+    },
+    {
+        "cover":{
+           "large":"https://covers.oreillystatic.com/images/0636920025832/lrg.jpg",
+           "small":"https://covers.oreillystatic.com/images/0636920025832/cat.gif"
+        
+},
+        "author":"Addy Osmani",
+        "title":"Learning Java Script Design Patterns",
+        "releaseDate":"08/2012",
+        "pages":254,
+        "link":"http://shop.oreilly.com/product/0636920025832.do"
+     
+},
+{
+    "cover":{
+       "large":"https://covers.oreillystatic.com/images/0636920027713/lrg.jpg",
+       "small":"https://covers.oreillystatic.com/images/0636920027713/cat.gif"
+    
+},
+    "author":"Cody Lindley",
+    "title":"Java Script Enlightenment",
+    "releaseDate":"12/2012",
+    "pages":166,
+    "link":"http://shop.oreilly.com/product/0636920027713.do"
+ 
+},
+{
+    "cover":{
+       "large":"https://covers.oreillystatic.com/images/0636920033141/lrg.jpg",
+       "small":"https://covers.oreillystatic.com/images/0636920033141/cat.gif"
+    
+},
+    "author":"Eric Elliott",
+    "title":"Programming Java Script Applications",
+    "releaseDate":"07/2014",
+    "pages":254,
+    "link":"http://shop.oreilly.com/product/0636920033141.do"
+ 
+},
+{
+    "cover":{
+       "large":"https://covers.oreillystatic.com/images/0636920047124/lrg.jpg",
+       "small":"https://covers.oreillystatic.com/images/0636920047124/cat.gif"
+    
+},
+    "author":"Nicolas Bevacqua",
+    "title":"Practical Modern Java Script",
+    "releaseDate":"07/2017",
+    "pages":334,
+    "link":"http://shop.oreilly.com/product/0636920047124.do"
+ 
+}
+
+    ]
+
+
+
