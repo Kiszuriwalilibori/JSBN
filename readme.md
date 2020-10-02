@@ -39,6 +39,10 @@ That  is a copy of certain recruitment task, used as a training platform
 ## Versions
 ##### 1 
 - initial
+##### 2
+- fully minimised bundle
+- modal informs about connection failure if neccesary
+- nunito from local resource
 
 ### To do
 

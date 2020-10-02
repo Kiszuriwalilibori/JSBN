@@ -32,7 +32,9 @@ module.exports = {
       id: "noBooksModal-content",
     },
     innerHTMLcreator: function createItem() { return "<span id ='closeNoBooksScreen' class='noBooksModal__close'>&times;</span><div><span>Nie znaleziono przedmiotów </span><br><span>spełniających kryteria wyszukiwania</span></div>"; },
+    
   },
+
 
 
   modal: {

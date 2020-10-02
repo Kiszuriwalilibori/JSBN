@@ -151,7 +151,7 @@
   font-family: 'Nunito Sans';
   src: url("./nunito/Nunito-Bold.ttf") format("truetype");
   font-display: swap;
-  font-weight: normal;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -184,6 +184,7 @@
   position: absolute;
   color: black;
 }
+/* nunito-sans-700 - latin-ext_latin */
 /*Modal with small image */
 .myModal {
   position: fixed;

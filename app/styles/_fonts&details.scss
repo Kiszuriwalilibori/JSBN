@@ -19,7 +19,7 @@
   font-family: 'Nunito Sans';
   src: url("./nunito/Nunito-Bold.ttf") format("truetype");
   font-display: swap;
-  font-weight: normal;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -53,3 +53,21 @@
   color: black;
 }
 /*# sourceMappingURL=fonts&details.css.map */
+
+
+
+/* nunito-sans-700 - latin-ext_latin */
+// @font-face {
+//   font-family: 'Nunito Sans';
+//   font-style: normal;
+//   font-weight: 700;
+//   font-display: swap;
+//   src: url('../fonts/nunito/nunito-sans-v6-latin-ext_latin-700.eot'); /* IE9 Compat Modes */
+//   src: local('Nunito Sans Bold'), local('NunitoSans-Bold'),
+//        url('../fonts/nunito/nunito/nunito-sans-v6-latin-ext_latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+//       url('../fonts/nunito/nunito-sans-v6-latin-ext_latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+//        url('../fonts/nunito/nunito-sans-v6-latin-ext_latin-700.woff') format('woff'), /* Modern Browsers */
+//        url('../fonts/nunito/nunito-sans-v6-latin-ext_latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+//        url('../fonts/nunito/nunito-sans-v6-latin-ext_latin-700.svg#NunitoSans') format('svg'); /* Legacy iOS */
+// }
+   //działa ale daje gorszy wygląd
