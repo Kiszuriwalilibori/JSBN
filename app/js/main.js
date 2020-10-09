@@ -1,9 +1,6 @@
 const UserFunctions = require("./userfunctions.js");
 const config = require("./config.js");
-var {
-  showError
-} = require('./showError');
-
+var { showError } = require("./showError");
 
 //= ========== Event Emitter ===============================
 
@@ -48,7 +45,7 @@ class nodeMaker {
   setFromObject(prop) {
     if (this.config.hasOwnProperty(prop)) {
       for (const x in this.config[prop]) {
-        if ((this.config[prop]).hasOwnProperty(x)) {
+        if (this.config[prop].hasOwnProperty(x)) {
           this.el[prop][x] = this.config[prop][x];
         }
       }
@@ -107,7 +104,6 @@ class Section extends nodeMaker {
         el.innerHTML = this.config.innerHTMLcreator(item, this.name);
         this.appendNode(el);
         //if ((index +1 )%3 == 0){ const x = document.createElement("P"); console.log(document.getElementById('booksContainer')); document.getElementById("booksContainer").appendChild(x)}
-
       });
     }
   }
@@ -117,7 +113,6 @@ class Section extends nodeMaker {
     return this;
   }
 }
-
 
 //= ============== Class Books ========================
 //= Books represents core books data and implements sorting and filtering thereof
@@ -162,7 +157,8 @@ class Books {
   }
 
   sort() {
-    if (this.query.sort === null || this.processedBooks.length === 0) {} else {
+    if (this.query.sort === null || this.processedBooks.length === 0) {
+    } else {
       const comparator = {
         pages: function pages(a, b) {
           return a.pages - b.pages;
@@ -229,7 +225,8 @@ class Model extends EventEmitter {
       this.Books.clearQuery();
       this.saveToStorage();
       this.emit("reset_filters");
-    } else if (JSON.stringify(newFilters) === JSON.stringify(this.Books.query)) {} else {
+    } else if (JSON.stringify(newFilters) === JSON.stringify(this.Books.query)) {
+    } else {
       this.Books.updateQuery(newFilters);
       this.Books.processContent();
       this.saveToStorage();
@@ -285,7 +282,7 @@ class View extends EventEmitter {
 
     Queries.filter = this.nodes.pageQueryInput.value ? this.nodes.pageQueryInput.value : null;
 
-    const filteredRadio = this.nodes.radio.filter(element => (!!element.checked));
+    const filteredRadio = this.nodes.radio.filter(element => !!element.checked);
     Queries.sort = filteredRadio.length > 0 ? filteredRadio[0].value : null;
     return Queries;
   }
@@ -297,16 +294,19 @@ class View extends EventEmitter {
       this.emit("changed_radios", this.getFilters());
     });
 
-    window.addEventListener("keyup", (e) => {
-      e.preventDefault();
-      this.emit("any_key_pressed", e);
-    }, false);
+    window.addEventListener(
+      "keyup",
+      e => {
+        e.preventDefault();
+        this.emit("any_key_pressed", e);
+      },
+      false
+    );
 
-
-    nodes.textInput.addEventListener("keydown", (e) => {
+    nodes.textInput.addEventListener("keydown", e => {
       const eventCode = e.keyCode;
 
-      if ((e.keyCode < 48 || e.keyCode > 57 && e.keyCode < 96 || e.keyCode > 105) && e.keyCode !== 13 && e.keyCode !== 8) {
+      if ((e.keyCode < 48 || (e.keyCode > 57 && e.keyCode < 96) || e.keyCode > 105) && e.keyCode !== 13 && e.keyCode !== 8) {
         if (e.preventDefault) e.preventDefault();
         return false;
       }
@@ -326,19 +326,15 @@ class View extends EventEmitter {
   }
 
   showBookModal(x) {
-
-    const modal = document.getElementById('myModal')
-    document.getElementById('book_modal_image').src = x.dataset.href;
-    modal.style.display = 'flex';
-    document.getElementById('close').addEventListener("click", e => this.emit("book_modal_close_clicked", modal));
-
+    const modal = document.getElementById("myModal");
+    document.getElementById("book_modal_image").src = x.dataset.href;
+    modal.style.display = "flex";
+    document.getElementById("close").addEventListener("click", e => this.emit("book_modal_close_clicked", modal));
   }
 
   hideModal(x) {
-    x.style.display = 'none';
+    x.style.display = "none";
   }
-
-
 
   update(data) {
     this.BooksSection.clear();
@@ -350,22 +346,21 @@ class View extends EventEmitter {
 
   mountModalTriggers() {
     const Images = Array.from(document.getElementsByClassName("book__cover"));
-    Images.forEach((element) => {
+    Images.forEach(element => {
       element.addEventListener("click", e => this.emit("image_clicked", e.currentTarget));
     });
   }
 
   showNoBooksModal() {
-    document.getElementById("error_description").textContent = 'Nie znaleziono książek spełniających kryteria wyszukiwania';
+    document.getElementById("error_description").textContent = "Nie znaleziono książek spełniających kryteria wyszukiwania";
     const errorModal = document.getElementById("errorModal");
-    document.getElementById("closeErrorScreen").addEventListener("click", e => this.emit('error_modal_close_clicked', errorModal));
+    document.getElementById("closeErrorScreen").addEventListener("click", e => this.emit("error_modal_close_clicked", errorModal));
     errorModal.style.display = "flex";
 
     // this.noBooksModal = new Modal(this.nodes.noBooksScreen, config.noBooksModal);
     // this.noBooksModal.create();
     // document.getElementById("closeNoBooksScreen").addEventListener("click", e => this.emit("no_books_modal_close_clicked", this.noBooksModal));
   }
-
 }
 
 //= ================================ class Controller ====================================================================
@@ -390,8 +385,8 @@ class Controller {
     view.on("modal_close_clicked", x => x.clear());
     model.on("no_books_found", x => view.showNoBooksModal(x));
     view.on("no_books_modal_close_clicked", x => x.clear());
-    view.on('error_modal_close_clicked', x => view.hideModal(x));
-    view.on('book_modal_close_clicked', x => view.hideModal(x));
+    view.on("error_modal_close_clicked", x => view.hideModal(x));
+    view.on("book_modal_close_clicked", x => view.hideModal(x));
   }
 
   AltR(ev) {
@@ -432,7 +427,7 @@ function initializer(storageLocation, remoteLocation) {
     resetButton: document.getElementById("resetButton"),
     resetFilters() {
       this.pageQueryInput.value = null;
-      this.radio.forEach((element) => {
+      this.radio.forEach(element => {
         element.checked = false;
       });
     },
@@ -440,32 +435,43 @@ function initializer(storageLocation, remoteLocation) {
 
   const storage = JSON.parse(sessionStorage.getItem(storageLocation));
 
-
   if (!Modernizr.sessionstorage || !storage) {
     remoteLoad(remoteLocation, storageLocation, pageNodes);
   } else if (Modernizr.sessionstorage && storage) {
-    createMVC(storage, storageLocation, pageNodes)
+    createMVC(storage, storageLocation, pageNodes);
   }
 }
 
-async function remoteLoad(remote, storage, nodes) {
-  try {
-    const x = await fetch(remote);
-    const resp = await x.json();
-    createMVC(resp, storage, nodes);
-  } catch (e) {
-    showError(e)
-  }
+// async function remoteLoad(remote, storage, nodes) {
+//   try {
+//     const x = await fetch(remote);
+//     const resp = await x.json();
+//     createMVC(resp, storage, nodes);
+//   } catch (e) {
+//     showError(e)
+//   }
+// }
+function remoteLoad(remote, storage, nodes) {
+  var worker = new Worker("./js/fetchworker.js");
+  worker.onmessage = e => {
+    const result = e.data;
+    if (result.message) {
+      showError({ message: "Nie udało się pobrać danych ze źródła", stack: "fetchworker.js" });
+    } else {
+      createMVC(result, storage, nodes);
+    }
+  };
+  worker.postMessage(remote);
 }
 
 function createMVC(data, storage, nodes) {
   if (data && storage && nodes) {
     try {
       model = new Model(data, storage);
-      view = new View(nodes, model)
+      view = new View(nodes, model);
       controller = new Controller(model, view);
     } catch (e) {
-      showError(e)
+      showError(e);
     }
   }
 }
