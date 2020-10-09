@@ -451,7 +451,7 @@ function initializer(storageLocation, remoteLocation) {
 async function remoteLoad(remote, storage, nodes) {
   try {
     
-    let fetchWorker = new Worker('fetchworker.js', {
+    let fetchWorker = new Worker('./fetchworker.js', {
       type: 'module'
     });
     fetchWorker.postMessage(remote);
