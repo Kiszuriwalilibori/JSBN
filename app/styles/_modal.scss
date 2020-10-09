@@ -12,7 +12,19 @@
     background-color: rgba(255, 255, 255, 0.8);
     justify-content: center;
     align-items: center;
+    animation: modal-intro 0.5s ease-in-out;
+    
   }
+  
+@keyframes modal-intro {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
   
   .myModal__content {
     background-color: transparent;

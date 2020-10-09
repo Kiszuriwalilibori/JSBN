@@ -43,6 +43,7 @@ That  is a copy of certain recruitment task, used as a training platform
 - fully minimised bundle
 - modal informs about connection failure if neccesary
 - nunito from local resource
+- simplified handling of nobooksfind event
 
 ### To do
 

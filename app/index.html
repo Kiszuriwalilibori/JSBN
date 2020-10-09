@@ -8,14 +8,19 @@
     <meta name="description" content="Javascriptowe książki">
     <title>Javascriptove ksiązki</title>
     <script src="./js/modernizr-custom.js"></script>
-    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700&display=swap&subset=latin-ext" rel="stylesheet"> -->
     <link rel="Stylesheet" href="./styles/style.css">
     <script src='./js/bundle.js' defer></script>
     <title>Document</title>
     <link rel="shortcut icon" href="./graphics/favicon.ico" type="image/x-icon" />
+    <link rel="modulepreload" href="./js/fetchworker.js">
     <template id='no_books_found_content'>
         <span id='closeNoBooksScreen' class='noBooksModal__close'>&times;</span>
         <div><span>Nie znaleziono przedmiotów </span><br><span>spełniających kryteria wyszukiwania</span></div>
+    </template>
+    <template id='modal_book_template'>
+        <div class="myModal__content"><span id="close" class="myModal__close icon-circle-regular icon-times-solid ">
+            </span><img class="myModal__image" id="book_modal_image"
+                src="https://covers.oreillystatic.com/images/9780596805531/lrg.jpg"></div>
     </template>
 </head>
 
@@ -60,9 +65,14 @@
         </aside>
     </main>
 
-    <aside id="myModal" class="myModal" style="display: none"> </aside>
+    <aside id="myModal" class="myModal" style="display: none">
+        <div class="myModal__content">
+            <span id="close" class="myModal__close icon-circle-regular icon-times-solid ">
+            </span>
+            <img class="myModal__image" id="book_modal_image" src="">
+        </div>
+    </aside>
 
-    <aside id="noBooksModal" class="myModal" style="display: none"></aside>
     <aside id="errorModal" class="myModal" style="display:none">
         <div class="noBooksModal__content">
             <span id="closeErrorScreen" class="noBooksModal__close">
@@ -70,7 +80,6 @@
             </span>
             <div>
                 <p>Wystąpił błąd: </p>
-                <!-- <br> -->
                 <p id='error_description'></p>
                 <p>Źródło</p>
                 <p id='error_location'></p>

@@ -1,7 +1,9 @@
-
 const UserFunctions = require("./userfunctions.js");
 const config = require("./config.js");
-var {showError} = require('./showError');
+var {
+  showError
+} = require('./showError');
+
 
 //= ========== Event Emitter ===============================
 
@@ -23,12 +25,20 @@ class EventEmitter {
 //  ========== Class nodeMaker =======================================
 //  this class supplies few methods that are later on implemented by classes Modal and Section
 class nodeMaker {
-  constructor(location, cnfg) { this.location = location; this.config = cnfg; this.el = null; }
+  constructor(location, cnfg) {
+    this.location = location;
+    this.config = cnfg;
+    this.el = null;
+  }
 
   createNode() {
-    if (this.config.hasOwnProperty("type")) { this.el = document.createElement(this.config.type); }
+    if (this.config.hasOwnProperty("type")) {
+      this.el = document.createElement(this.config.type);
+    }
 
-    if (this.config.hasOwnProperty("classes")) { this.config.classes.forEach(item => this.el.classList.add(item)); }
+    if (this.config.hasOwnProperty("classes")) {
+      this.config.classes.forEach(item => this.el.classList.add(item));
+    }
 
     this.setFromObject("attributes");
     this.setFromObject("dataset");
@@ -38,7 +48,9 @@ class nodeMaker {
   setFromObject(prop) {
     if (this.config.hasOwnProperty(prop)) {
       for (const x in this.config[prop]) {
-        if ((this.config[prop]).hasOwnProperty(x)) { this.el[prop][x] = this.config[prop][x]; }
+        if ((this.config[prop]).hasOwnProperty(x)) {
+          this.el[prop][x] = this.config[prop][x];
+        }
       }
     }
   }
@@ -59,23 +71,23 @@ class nodeMaker {
 }
 //= ======================================================= class Modal ===========
 // creates modal
-class Modal extends nodeMaker {
-  create() {
-    if (this.location.style.display === "none") {
-      this.location.style.display = "flex";
-    }
-    const el = this.createNode();
-    el.innerHTML = this.config.innerHTMLcreator();
-    this.appendNode(el);
-  }
+// class Modal extends nodeMaker {
+//   create() {
+//     if (this.location.style.display === "none") {
+//       this.location.style.display = "flex";
+//     }
+//     const el = this.createNode();
+//     el.innerHTML = this.config.innerHTMLcreator();
+//     this.appendNode(el);
+//   }
 
-  clear() {
-    this.removeNode();
-    if (this.location.style.display === "flex") {
-      this.location.style.display = "none";
-    }
-  }
-}
+//   clear() {
+//     this.removeNode();
+//     if (this.location.style.display === "flex") {
+//       this.location.style.display = "none";
+//     }
+//   }
+// }
 //= ======================================================= class Section ===================================
 class Section extends nodeMaker {
   constructor(data, location, config) {
@@ -95,12 +107,15 @@ class Section extends nodeMaker {
         el.innerHTML = this.config.innerHTMLcreator(item, this.name);
         this.appendNode(el);
         //if ((index +1 )%3 == 0){ const x = document.createElement("P"); console.log(document.getElementById('booksContainer')); document.getElementById("booksContainer").appendChild(x)}
-       
+
       });
     }
   }
 
-  clear() { this.removeNode(); return this; }
+  clear() {
+    this.removeNode();
+    return this;
+  }
 }
 
 
@@ -218,7 +233,9 @@ class Model extends EventEmitter {
       this.Books.updateQuery(newFilters);
       this.Books.processContent();
       this.saveToStorage();
-      if (!this.Books.processedItems.length > 0) { this.emit("no_books_found"); }
+      if (!this.Books.processedItems.length > 0) {
+        this.emit("no_books_found");
+      }
       this.emit("updated", this.Books.data);
     }
   }
@@ -254,7 +271,9 @@ class View extends EventEmitter {
   setFilters() {
     this.nodes.pageQueryInput.value = this.query.filter;
     const sort_node = document.getElementById(this.query.sort);
-    if (sort_node) { sort_node.setAttribute("checked", true); }
+    if (sort_node) {
+      sort_node.setAttribute("checked", true);
+    }
   }
 
   resetFilters() {
@@ -278,7 +297,10 @@ class View extends EventEmitter {
       this.emit("changed_radios", this.getFilters());
     });
 
-    window.addEventListener("keyup", (e) => { e.preventDefault(); this.emit("any_key_pressed", e); }, false);
+    window.addEventListener("keyup", (e) => {
+      e.preventDefault();
+      this.emit("any_key_pressed", e);
+    }, false);
 
 
     nodes.textInput.addEventListener("keydown", (e) => {
@@ -304,13 +326,19 @@ class View extends EventEmitter {
   }
 
   showBookModal(x) {
-    const configCopy = Object.assign({}, config.modal);
-    configCopy.target = x;
-    this.Modal = new Modal(this.nodes.myModal, configCopy);
-    this.Modal.create();
-    const close = document.getElementById("close"); // close jest u za mało specyficzne na wszelki wypadek coś bardziej specyficznego jako id
-    close.addEventListener("click", e => this.emit("modal_close_clicked", this.Modal));
+
+    const modal = document.getElementById('myModal')
+    document.getElementById('book_modal_image').src = x.dataset.href;
+    modal.style.display = 'flex';
+    document.getElementById('close').addEventListener("click", e => this.emit("book_modal_close_clicked", modal));
+
   }
+
+  hideModal(x) {
+    x.style.display = 'none';
+  }
+
+
 
   update(data) {
     this.BooksSection.clear();
@@ -328,11 +356,16 @@ class View extends EventEmitter {
   }
 
   showNoBooksModal() {
-    this.noBooksModal = new Modal(this.nodes.noBooksScreen, config.noBooksModal);
-    this.noBooksModal.create();
-    document.getElementById("closeNoBooksScreen").addEventListener("click", e => this.emit("no_books_modal_close_clicked", this.noBooksModal));
+    document.getElementById("error_description").textContent = 'Nie znaleziono książek spełniających kryteria wyszukiwania';
+    const errorModal = document.getElementById("errorModal");
+    document.getElementById("closeErrorScreen").addEventListener("click", e => this.emit('error_modal_close_clicked', errorModal));
+    errorModal.style.display = "flex";
+
+    // this.noBooksModal = new Modal(this.nodes.noBooksScreen, config.noBooksModal);
+    // this.noBooksModal.create();
+    // document.getElementById("closeNoBooksScreen").addEventListener("click", e => this.emit("no_books_modal_close_clicked", this.noBooksModal));
   }
-  
+
 }
 
 //= ================================ class Controller ====================================================================
@@ -357,6 +390,8 @@ class Controller {
     view.on("modal_close_clicked", x => x.clear());
     model.on("no_books_found", x => view.showNoBooksModal(x));
     view.on("no_books_modal_close_clicked", x => x.clear());
+    view.on('error_modal_close_clicked', x => view.hideModal(x));
+    view.on('book_modal_close_clicked', x => view.hideModal(x));
   }
 
   AltR(ev) {
@@ -376,7 +411,9 @@ class Controller {
 
 //= =========== START===============
 
-window.onload = function () { initializer("localBooks", "https://api.jsonbin.io/b/5eaffc1a8284f36af7b53291/5"); };
+window.onload = function () {
+  initializer("localBooks", "https://api.jsonbin.io/b/5eaffc1a8284f36af7b53291/5");
+};
 
 let model;
 let view;
@@ -390,9 +427,9 @@ function initializer(storageLocation, remoteLocation) {
     noBooksScreen: document.getElementById("noBooksModal"),
     noBooksScreenContent: document.getElementById("noBooksModal-content"),
     myModal: document.getElementById("myModal"),
-    form: document.getElementById("radioInputs"), //
+    form: document.getElementById("radioInputs"),
     textInput: document.getElementById("textInput"),
-    resetButton: document.getElementById("resetButton"), //
+    resetButton: document.getElementById("resetButton"),
     resetFilters() {
       this.pageQueryInput.value = null;
       this.radio.forEach((element) => {
@@ -402,23 +439,39 @@ function initializer(storageLocation, remoteLocation) {
   };
 
   const storage = JSON.parse(sessionStorage.getItem(storageLocation));
+
+
   if (!Modernizr.sessionstorage || !storage) {
     remoteLoad(remoteLocation, storageLocation, pageNodes);
   } else if (Modernizr.sessionstorage && storage) {
-    model = new Model(storage, storageLocation);
-    view = new View(pageNodes, model);
-    controller = new Controller(model, view);
-    
+    createMVC(storage, storageLocation, pageNodes)
   }
 }
 
 async function remoteLoad(remote, storage, nodes) {
   try {
+    
+    let fetchWorker = new Worker('fetchworker.js', {
+      type: 'module'
+    });
+    fetchWorker.postMessage(remote);
     const x = await fetch(remote);
     const resp = await x.json();
-    model = new Model(resp, storage);
-    view = new View(nodes, model);
-    controller = new Controller(model, view);
-    return resp;
-  } catch (e) {showError(e) }
+    createMVC(resp, storage, nodes);
+    //return resp;
+  } catch (e) {
+    showError(e)
+  }
+}
+
+function createMVC(data, storage, nodes) {
+  if (data && storage && nodes) {
+    try {
+      model = new Model(data, storage);
+      view = new View(nodes, model)
+      controller = new Controller(model, view);
+    } catch (e) {
+      showError(e)
+    }
+  }
 }
