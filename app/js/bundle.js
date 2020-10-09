@@ -504,15 +504,9 @@ function initializer(storageLocation, remoteLocation) {
 
 async function remoteLoad(remote, storage, nodes) {
   try {
-    
-    let fetchWorker = new Worker('./fetchworker.js', {
-      type: 'module'
-    });
-    fetchWorker.postMessage(remote);
     const x = await fetch(remote);
     const resp = await x.json();
     createMVC(resp, storage, nodes);
-    //return resp;
   } catch (e) {
     showError(e)
   }
