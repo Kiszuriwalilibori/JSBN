@@ -44,10 +44,10 @@ That  is a copy of certain recruitment task, used as a training platform
 - modal informs about connection failure if neccesary
 - nunito from local resource
 - simplified handling of nobooksfind event
-- simplified modals creation
+- simplified View
 - data loaded by WebWorker
 
 ### To do
 
 version compatible with IE
-Jeżeli to możliwe okienka na obrazki powinny mieć zdefiniowaną wielkość bo skacze przy ładowaniu i dać na nie lazy
+Jeżeli to możliwe okienka na obrazki powinny mieć zdefiniowaną wielkość bo skacze przy ładowaniu albo pokazywać się w całosci dopiero po pobraniu obrazka

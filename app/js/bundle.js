@@ -1,59 +1,36 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-// this object holds configuration data used by instantions of Modal and Section classes
-
-
-const UserFunctions = require("./userfunctions.js");
+// various functions used elesewhere in application
 
 module.exports = {
+  name: {
+    getSurname: function getSurname(str) {
+      const lastspace = function lastspace(x) {
+        return x.lastIndexOf(" ");
+      };
 
-  booksSection: {
-    type: "li",
-    classes: ["book"],
-    attributes: {
-      itemtype: "http://schema.org/Book",
-      itemscope: "",
+      return lastspace(str) === -1 ? str : str.slice(lastspace(str) + 1);
     },
-    dataset: {
-      number: null,
-    },
-    innerHTMLcreator: function createItem(bookObject, functionObj) {
-      return "\n <a class = 'book__cover'  data-href = ".concat(bookObject.cover.large, ">\n <img itemprop = 'image' alt = 'book cover'class='book__cover__image fadein' src=").concat(bookObject.cover.small, ">\n                                    </a>\n                                    <div class='bookInfo'>\n                                        <div class='bookInfo__titleContainer'>\n                                            <p class= 'bookInfo__title' itemprop ='name'>").concat(bookObject.title, "</p>\n                                           \n                                            \n                                        </div>\n                                        <div class='book__details'>\n                                            <p itemprop ='author' class= \"book__details_author\"><span> ").concat(functionObj.processedFirstName(bookObject.author), "</span> ")
-        .concat(functionObj.getSurname(bookObject.author), "</p>\n <p itemprop ='datePublished'><span>Release Date:</span> ")
-        .concat(bookObject.releaseDate, "</p>\n  <p itemprop = 'numberOfPages'><span>Pages:</span> ")
-        .concat(bookObject.pages, "</p>\n <p itemprop ='discussionUrl'><span>Link:</span> <a href = ")
-        .concat(bookObject.link, ">shop</a></p>\n  </div>\n </div>\n    \n    \n  ");
-    },
-    extraFunction: UserFunctions.name,
-  },
-  noBooksModal: {
+    getFirstname: function getFirstname(str) {
+      const lastspace = function lastspace(y) {
+        return y.lastIndexOf(" ");
+      };
 
-    type: "div",
-    classes: ["noBooksModal__content"],
-    attributes: {
-      id: "noBooksModal-content",
+      return lastspace(str) === -1 ? str : str.slice(0, lastspace(str));
     },
-    innerHTMLcreator: function createItem() { return "<span id ='closeNoBooksScreen' class='noBooksModal__close'>&times;</span><div><span>Nie znaleziono przedmiotów </span><br><span>spełniających kryteria wyszukiwania</span></div>"; },
-    
+    processedFirstName: function processedFirstName(str) {
+      return `By ${this.getFirstname(str)}`;
+    },
   },
 
+}
 
 
-  modal: {
 
-    type: "div",
-    classes: ["myModal__content"],
-    attributes: {
-      id: "myModal-content",
-    },
 
-    innerHTMLcreator: function createItem() { const src = (this.target).dataset.href; return "<span id ='close' class=\"myModal__close icon-circle-regular icon-times-solid \"> </span><img  class = 'myModal__image' src=".concat(src, "></img>"); },
-  },
 
-};
 
-},{"./userfunctions.js":4}],2:[function(require,module,exports){
-const UserFunctions = require("./userfunctions.js");
-const config = require("./config.js");
+},{}],2:[function(require,module,exports){
+const commonJS = require("./commonJS.js");
 var { showError } = require("./showError");
 
 //= ========== Event Emitter ===============================
@@ -72,101 +49,48 @@ class EventEmitter {
     (this._events[evt] || []).slice().forEach(lsn => lsn(arg));
   }
 }
-
-//  ========== Class nodeMaker =======================================
-//  this class supplies few methods that are later on implemented by classes Modal and Section
-class nodeMaker {
-  constructor(location, cnfg) {
-    this.location = location;
-    this.config = cnfg;
-    this.el = null;
-  }
-
-  createNode() {
-    if (this.config.hasOwnProperty("type")) {
-      this.el = document.createElement(this.config.type);
-    }
-
-    if (this.config.hasOwnProperty("classes")) {
-      this.config.classes.forEach(item => this.el.classList.add(item));
-    }
-
-    this.setFromObject("attributes");
-    this.setFromObject("dataset");
-    return this.el;
-  }
-
-  setFromObject(prop) {
-    if (this.config.hasOwnProperty(prop)) {
-      for (const x in this.config[prop]) {
-        if (this.config[prop].hasOwnProperty(x)) {
-          this.el[prop][x] = this.config[prop][x];
-        }
-      }
-    }
-  }
-
-  removeNode() {
-    while (this.location.hasChildNodes()) {
-      this.location.removeChild(this.location.lastChild);
-    }
-  }
-
-  attachInnerHTML(x) {
-    x.innerHTML = this.config.innerHTMLcreator();
-  }
-
-  appendNode() {
-    this.location.appendChild(this.el);
-  }
-}
-//= ======================================================= class Modal ===========
-// creates modal
-// class Modal extends nodeMaker {
-//   create() {
-//     if (this.location.style.display === "none") {
-//       this.location.style.display = "flex";
-//     }
-//     const el = this.createNode();
-//     el.innerHTML = this.config.innerHTMLcreator();
-//     this.appendNode(el);
-//   }
-
-//   clear() {
-//     this.removeNode();
-//     if (this.location.style.display === "flex") {
-//       this.location.style.display = "none";
-//     }
-//   }
-// }
-//= ======================================================= class Section ===================================
-class Section extends nodeMaker {
-  constructor(data, location, config) {
-    super(location, config);
+class NewSection {
+  constructor(data, location) {
     this.data = data;
-    this.name = config.extraFunction;
+    this.location = location;
   }
 
-  create() {
-    if (this.data.length > 0) {
-      this.data.forEach((item, index) => {
-        this.config.dataset = {
-          number: index + 1,
-        };
+create(){
+  this.location.style.display ='none';
+  
+  const bookTemplate = document.getElementById("book_template").content.querySelector("li");
+  const breakTemplate = document.getElementById("separator_template").content.querySelector("li");
 
-        const el = this.createNode();
-        el.innerHTML = this.config.innerHTMLcreator(item, this.name);
-        this.appendNode(el);
-        //if ((index +1 )%3 == 0){ const x = document.createElement("P"); console.log(document.getElementById('booksContainer')); document.getElementById("booksContainer").appendChild(x)}
-      });
-    }
-  }
-
-  clear() {
-    this.removeNode();
-    return this;
-  }
+  if (this.data.length > 0) {
+    this.data.forEach((item, index) => {
+      index +=1;
+      const book = document.importNode(bookTemplate, true);
+      book.dataset.number = (index).toString();
+      book.querySelector("a").dataset.href = item.cover.large ||'';
+      book.querySelector("img").src = item.cover.small ||'';
+      book.querySelector('.book__title').textContent = item.title ||'';
+      book.querySelector('.author__firstname').textContent ="By" +" " + commonJS.name.getFirstname(item.author)  ||'';
+      book.querySelector('.author__surename').textContent = commonJS.name.getSurname(item.author)  ||'';
+      book.querySelector('.bookInfo__release-date').textContent =" " + item.releaseDate  ||'';
+      book.querySelector('.bookInfo__pages').textContent =" "+ item.pages  ||'';
+      book.querySelector('.bookInfo__shop').href = item.link  ||'';
+      this.location.appendChild(book);
+      index%3 ===0 &&this.location.appendChild(document.importNode(breakTemplate, true));
+    })
 }
+  this.location.style.display ='flex';
+}
+clear(){
+  this.location.style.display ='none';
+  while (this.location.lastChild) {
+    this.location.removeChild(this.location.lastChild);
+  }
+  this.location.style.display ='flex';
+  return this;
+}
+}
+
+
 
 //= ============== Class Books ========================
 //= Books represents core books data and implements sorting and filtering thereof
@@ -300,7 +224,7 @@ class Model extends EventEmitter {
   }
 
   create(data) {
-    this.Books = new Books(data, UserFunctions.name);
+    this.Books = new Books(data, commonJS.name);
     this.Books.processContent();
     this.saveToStorage();
   }
@@ -313,7 +237,7 @@ class View extends EventEmitter {
     super();
     this.nodes = nodes;
     this.data = model.getProcessedItems();
-    this.BooksSection = new Section(model.getProcessedItems(), this.nodes.booksContainer, config.booksSection);
+    this.BooksSection = new NewSection(model.getProcessedItems(), this.nodes.booksContainer);
     this.showBooks().mountHandlers(this.nodes);
     this.query = model.getData().query;
     this.setFilters();
@@ -392,7 +316,8 @@ class View extends EventEmitter {
 
   update(data) {
     this.BooksSection.clear();
-    this.BooksSection = new Section(data.processedBooks, this.nodes.booksContainer, config.booksSection);
+
+    this.BooksSection = new NewSection(data.processedBooks, this.nodes.booksContainer);
     this.BooksSection.create();
     this.nodes.pageQueryInput.value = data.query.filter;
     this.mountModalTriggers();
@@ -461,6 +386,10 @@ class Controller {
 //= =========== START===============
 
 window.onload = function () {
+
+  const initiallyInvisibleElements = document.getElementsByClassName('initially-invisible');
+  Array.prototype.forEach.call(initiallyInvisibleElements, (element) =>{element.style.visibility ='visible'});
+  
   initializer("localBooks", "https://api.jsonbin.io/b/5eaffc1a8284f36af7b53291/5");
 };
 
@@ -496,16 +425,17 @@ function initializer(storageLocation, remoteLocation) {
   }
 }
 
-// async function remoteLoad(remote, storage, nodes) {
-//   try {
-//     const x = await fetch(remote);
-//     const resp = await x.json();
-//     createMVC(resp, storage, nodes);
-//   } catch (e) {
-//     showError(e)
-//   }
-// }
+async function remoteLoadWithoutWorker(remote, storage, nodes) {
+  try {
+    const x = await fetch(remote);
+    const resp = await x.json();
+    createMVC(resp, storage, nodes);
+  } catch (e) {
+    showError(e)
+  }
+}
 function remoteLoad(remote, storage, nodes) {
+  if (window.Worker) {
   var worker = new Worker("./js/fetchworker.js");
   worker.onmessage = e => {
     const result = e.data;
@@ -516,6 +446,10 @@ function remoteLoad(remote, storage, nodes) {
     }
   };
   worker.postMessage(remote);
+  }
+  else{
+    remoteLoadWithoutWorker(remote, storage, nodes)
+  }
 }
 
 function createMVC(data, storage, nodes) {
@@ -530,7 +464,7 @@ function createMVC(data, storage, nodes) {
   }
 }
 
-},{"./config.js":1,"./showError":3,"./userfunctions.js":4}],3:[function(require,module,exports){
+},{"./commonJS.js":1,"./showError":3}],3:[function(require,module,exports){
 module.exports = {
   showError: function showError(err) {
     document.getElementById("error_description").textContent = err.message;
@@ -544,36 +478,5 @@ module.exports = {
     }
   },
 };
-
-},{}],4:[function(require,module,exports){
-// various functions used elesewhere in application
-
-module.exports = {
-  name: {
-    getSurname: function getSurname(str) {
-      const lastspace = function lastspace(x) {
-        return x.lastIndexOf(" ");
-      };
-
-      return lastspace(str) === -1 ? str : str.slice(lastspace(str) + 1);
-    },
-    getFirstname: function getFirstname(str) {
-      const lastspace = function lastspace(y) {
-        return y.lastIndexOf(" ");
-      };
-
-      return lastspace(str) === -1 ? str : str.slice(0, lastspace(str));
-    },
-    processedFirstName: function processedFirstName(str) {
-      return `By ${this.getFirstname(str)}`;
-    },
-  },
-
-}
-
-
-
-
-
 
 },{}]},{},[2]);

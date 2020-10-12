@@ -3,216 +3,365 @@
 @import "mixins";
 @import "fonts&details";
 @import "modal";
-@import "generalities";
+@import "general";
 
-section{
-  width:100%;
-  @media screen and (max-width: 550px) {margin-top: 2rem; }
-  @media screen and (max-width: 550px) {padding-left: $padding576; padding-right: 0;}  
-    ol {
-      display: flex;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      padding-left:0;
-          li {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          
-            @media screen and (min-width: 1025px) {min-width:  calc(#{$imageLength} * 1.74)}
-            @media screen and (min-width: 768px) and (max-width: 1024px) {width: 49.9%;};
-            @media screen and (min-width: 551px)and (max-width: 767px) {width: 49.9%;};
-            @media screen and (max-width: 550px) {width: 100%; margin: 1.8vw 0}
-                &:before {
-          
-                  content: attr(data-number);
-                  color: $greenish;
-                  font-size: 3.1rem;
-                  display: block;
-                  position:relative;
-                  left: -40%;
-                  top: 1rem;
-                  @media screen and (max-width: 550px) {left: -1rem; top: -5.5rem}
-              
-                }
-          
-            @media (max-width: 550px) {flex-direction: row;}
-            
-          }
-      }
-  
+section {
+  width: 100%;
+
+  @media screen and (max-width: 550px) {
+    margin-top: 2rem;
   }
 
+  @media screen and (max-width: 550px) {
+    padding-left: $padding576;
+    padding-right: 0;
+  }
 
-.bookInfo{
-  width:100%;
-    &__titleContainer {
+}
+
+.container-for-books {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-left: 0;
+  list-style: none;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (min-width: 1025px) {
+    min-width: calc(#{$imageLength} * 1.74)
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    width: 49.9%;
+  }
+
+  @media screen and (min-width: 551px)and (max-width: 767px) {
+    width: 49.9%;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    margin: 1.8vw 0
+  }
+
+  @media (max-width: 550px) {
+    flex-direction: row;
+  }
+
+  &:before {
+    content: attr(data-number);
+    color: $greenish;
+    font-size: 3.1rem;
+    display: block;
+    position: relative;
+    left: -40%;
+    top: 1rem;
+
+    @media screen and (max-width: 550px) {
+      left: -1rem;
+      top: -5.5rem
+    }
+  }
+
+  &__cover {
+    cursor: pointer;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15),
+      0 2px 2px rgba(0, 0, 0, 0.15),
+      0 4px 4px rgba(0, 0, 0, 0.15),
+      0 8px 8px rgba(0, 0, 0, 0.15);
+
+    &__image {
+      margin: 0 auto;
+      display: block;
+      @include multiBreakPoint($breakPoints, 'width', $imageX);
+    }
+  }
+
+  ;
+
+  &__informations {
+    width: 100%;
+
+    &-titleContainer {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
     }
-    &__title{
-      font-size: $bookTitleFontSize;
-      margin: 0 0;
-      padding: 1rem 0;
-      text-align: center;
-    
-      &:after {
-        content: "";
-        display: block;
-        position: relative;
-        width: 2.2vw;
-        height: 2px;
-        bottom: -1rem;
-        margin: auto;
-        background-color: red;
-        @include multiBreakPoint($breakPoints, 'width', $redUnderLineX);
+  }
 
-      }
-    }
+  &__title {
+    font-size: $bookTitleFontSize;
+    margin: 0 0;
+    padding: 1rem 0;
+    text-align: center;
 
-}
-
-.book { 
-  &__cover {
-    cursor: pointer;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
-              0 2px 2px rgba(0,0,0,0.15), 
-              0 4px 4px rgba(0,0,0,0.15), 
-              0 8px 8px rgba(0,0,0,0.15);
-     &__image{margin: 0 auto;
+    &:after {
+      content: "";
       display: block;
-      @include multiBreakPoint($breakPoints, 'width', $imageX);}
-  };
-}
-
-.book__details{
-  line-height:1;
-    &_author{
-      //font-family: 'cooperlightitalic';
-      font-style: italic;
-      font-size: calc(#{$bookTitleFontSize} * 0.86);
-      font-weight: normal;
-      padding: 1rem 0;
-      margin: 0 0;
-        span {
-          @include bookdetailsName;
-        }
+      position: relative;
+      width: 2.2vw;
+      height: 2px;
+      bottom: -1rem;
+      margin: auto;
+      background-color: red;
+      @include multiBreakPoint($breakPoints, 'width', $redUnderLineX);
     }
-    :not(:first-child) { @include smallText;
-        span {
-          @include bookdetailsName;
-        }
-        a {
-          color: red;
-          text-decoration:none;
-          border-bottom: 1px dashed red;
-        }
-      }
+  }
 }
 
 
-// right empty container only > 1024 and only to block space
-.aside-right{
-width:15%;
-@media screen and (max-width:1024px) {display:none;}
+.form__subtitle {
+  text-align: left;
+  font-size: calc(#{$bookTitleFontSize} * 1.25);
+  margin-bottom: 0;
+  padding-top: 1rem;
+}
 
-};
-aside{
- 
-  @media screen and (min-width: 1025px) {width: 15%;};
-  @media screen and (min-width: 761px) and (max-width: 1024px) {width: 25vw;};
-  @media screen and (min-width: 551px)and (max-width: 760px) {width: 100vw;};
-  @media screen and (max-width: 550px) {width: 100%;}
-  @media screen and (max-width: 760px) {@include mainPadding}
+aside {
+
+  @media screen and (min-width: 1025px) {
+    width: 15%;
+  }
+
+  @media screen and (min-width: 761px) and (max-width: 1024px) {
+    width: 25vw;
+  }
+
+  @media screen and (min-width: 551px)and (max-width: 760px) {
+    width: 100vw;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 760px) {
+    @include mainPadding;
+  }
 
   display: block;
   text-align: left;
-  padding-top: 2.5rem; 
-    
-    h2{text-align: left;
-    font-size: $sizeAsideHeaders;
-    font-size: calc(#{$bookTitleFontSize} * 1.25);
-    margin-bottom:0;}
-
-    ul{list-style-type:none;
-      list-style:none;
-      padding: 0.5rem 0 1.0rem 0;
-      margin-bottom: 0;
-      display: grid;
-      grid-gap: 4px;
-      @include formBorder;
-      @media screen and (max-width: 760px) {grid-template-columns: 1fr 1fr 1fr;}
-      li{
-        line-height:1.2rem;
-        height:1.2rem;
-        font-size: 0.8rem;
-        font-size: calc(#{$bookTitleFontSize} * 0.8);
-        @media screen and (max-width: 448px) {font-size: 12px;}
-        display:flex;
-        align-items: center;
-      }
-    }
-
-   h2:last-of-type{padding-top: 1rem;}
-
-
+  padding-top: 2.5rem;
+  visibility:hidden;
 }
 
-aside #textInput{ @media screen and (max-width: 760px) {
-  grid-template-columns: 1fr;
-  justify-items: center;}
-  li{margin-bottom: 0.5rem;}
+.form__list {
+  list-style-type: none;
+  list-style: none;
+  padding: 0.5rem 0 1.0rem 0;
+  margin-bottom: 0;
+  display: grid;
+  grid-gap: 4px;
+  @include formBorder;
 
-}
-.queryForm__pageLimit{display: grid; grid-gap:10px;}
-
-.pageQueryInput{
-  margin: 0.5rem 0.2rem; 
-  border:none; 
-  font-weight: bold; 
-  border-radius:0.1rem;
-  box-shadow: inset 1px 2px 2px rgba(0,0,0,0.3);
-              //inset 2px 2px 3px 3px rgba(0,0,0,0.15);
-              // inset 0 4px 4px rgba(0,0,0,0.15), 
-              // inset 0 8px 8px rgba(0,0,0,0.15);
-  text-align:center;
-   @include multiBreakPoint($breakPoints,'width', $pageQueryButtonX );
-   @include multiBreakPoint($breakPoints,'height', $pageQueryButtonY );
-  &:focus{outline: none};
+  @media screen and (max-width: 760px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
-.resetButton{
+.form__list-pages {
+  @media screen and (max-width: 760px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+
+
+
+.form__item {
+  line-height: 1.2rem;
+  height: 1.2rem;
+  font-size: 0.8rem;
+  font-size: calc(#{$bookTitleFontSize} * 0.8);
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 448px) {
+    font-size: 12px;
+  }
+}
+
+.form__item-pages {
+  margin-bottom: 0.5rem;
+}
+
+.form__pages {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.form__pagenumbers-input {
+  margin: 0.5rem 0.2rem;
+  border: none;
   font-weight: bold;
-  color:white;
+  border-radius: 0.1rem;
+  box-shadow: inset 1px 2px 2px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  @include multiBreakPoint($breakPoints, 'width', $pageQueryButtonX);
+  @include multiBreakPoint($breakPoints, 'height', $pageQueryButtonY);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+
+
+.resetButton {
+  font-weight: bold;
+  color: white;
   background-color: $buttongrey;
   background-color: $greenish;
-  border:none;
-  display:block;
-  border-radius:0.25rem;
+  border: none;
+  display: block;
+  border-radius: 0.25rem;
   margin: 0 auto;
-  text-align:center;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
-              0 2px 2px rgba(0,0,0,0.15), 
-              0 4px 4px rgba(0,0,0,0.15), 
-              0 8px 8px rgba(0,0,0,0.15);
+  text-align: center;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15),
+    0 2px 2px rgba(0, 0, 0, 0.15),
+    0 4px 4px rgba(0, 0, 0, 0.15),
+    0 8px 8px rgba(0, 0, 0, 0.15);
+
   @media (max-width:550px) {
     font-size: calc(11px + 2.33 * (100vw - 320px) / 230);
   }
-  
-  @include multiBreakPoint($breakPoints,'margin-top', $resetButtonMargin );
-  @include multiBreakPoint($breakPoints,'margin-bottom', $resetButtonMargin );
-  @include multiBreakPoint($breakPoints,'width', $resetButtonX );
-  @include multiBreakPoint($breakPoints,'height', $resetButtonY );
 
+  @include multiBreakPoint($breakPoints, 'margin-top', $resetButtonMargin);
+  @include multiBreakPoint($breakPoints, 'margin-bottom', $resetButtonMargin);
+  @include multiBreakPoint($breakPoints, 'width', $resetButtonX);
+  @include multiBreakPoint($breakPoints, 'height', $resetButtonY);
 }
 
-.fadein{
-  animation: fadein 1s; 
+.fadein {
+  animation: fadein 1s ease-in-out;
 }
 
 @keyframes fadein {
-  0% {opacity: 0}; 
-  100% {opacity: 1};
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.withOrderNumber {
+  &:before {
+    content: attr(data-number);
+    color: $greenish;
+    font-size: 3.1rem;
+    display: block;
+    position: relative;
+    left: -40%;
+    top: 1rem;
+
+    @media screen and (max-width: 550px) {
+      left: -1rem;
+      top: -5.5rem
+    }
+
+  }
+}
+
+.separator {
+  width: 100%;
+
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.header {
+  position: relative;
+  top: 0;
+  left: 0;
+  border-bottom: 1px dashed;
+  border-color: rgb(198, 198, 198);
+  visibility: hidden;
+
+  @media screen and (max-width: 760px) {
+    @include mainPadding
+  }
+
+  @media screen and (min-width: 1025px) {
+    padding: 0 1.875%;
+  }
+
+  @media screen and (min-width: 761px) and (max-width: 1024px) {
+    padding: 0 3.22%;
+  }
+}
+
+.book__details {
+  &-fixed {
+    display: inline-block;
+    width: 50%;
+    text-align: right;
+  }
+
+  &-variable {
+    display: inline;
+  }
+
+  &-small {
+    font-size: 12px;
+    letter-spacing: -0.02rem;
+    line-height: 1.15;
+    font-style: italic;
+  }
+
+  &-green {
+    color: #00A9A7;
+  }
+
+  &-red {
+    color: red;
+    text-decoration: none;
+    border-bottom: 1px dashed red;
+  }
+
+  &-author {
+    font-style: italic;
+    font-size: calc(#{$bookTitleFontSize} * 0.86);
+    font-weight: normal;
+    padding: 1rem 0;
+    margin: 0 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+.header__title {
+
+  line-height: 3;
+  font-size: 1.75rem;
+  font-weight: 700;
+  height: 100%;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    left: 1.2rem;
+    top: 0.8rem;
+    z-index: -10;
+    background-color: $yellow;
+  }
+
 }

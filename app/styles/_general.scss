@@ -36,38 +36,7 @@ main {
     @media screen and (max-width: 760px) {flex-direction: column;};  
 }
   
-main, header {
+main {
     @media screen and (min-width: 1025px) {padding: 0 1.875%};
     @media screen and (min-width: 761px) and (max-width: 1024px) {padding: 0 3.22%};
 }
-  
-  
-header {
-    position: relative;
-    top:0;
-    left:0;
-    border-bottom: 1px dashed;
-    border-color: rgb(198, 198, 198);
-    @media screen and (max-width: 760px) {@include mainPadding }// spx
-    h1{
-   
-      line-height: 3;
-      font-size: 1.75rem;
-      font-weight: 700;
-      height: 100%;
-      
-      &:before {
-        content: "";
-        display: block;
-        position:absolute;
-        width: 2.5rem;
-        height: 2.5rem;
-        left: 1.2rem;
-        top: 0.8rem;
-        z-index: -10;
-        background-color: $yellow;
-      }
-  
-    }
-}
-  
