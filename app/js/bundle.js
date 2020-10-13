@@ -1,5 +1,4 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-// various functions used elesewhere in application
 
 module.exports = {
   name: {
@@ -7,25 +6,19 @@ module.exports = {
       const lastspace = function lastspace(x) {
         return x.lastIndexOf(" ");
       };
-
       return lastspace(str) === -1 ? str : str.slice(lastspace(str) + 1);
     },
     getFirstname: function getFirstname(str) {
       const lastspace = function lastspace(y) {
         return y.lastIndexOf(" ");
       };
-
       return lastspace(str) === -1 ? str : str.slice(0, lastspace(str));
     },
     processedFirstName: function processedFirstName(str) {
       return `By ${this.getFirstname(str)}`;
     },
   },
-
 }
-
-
-
 
 
 
@@ -49,45 +42,46 @@ class EventEmitter {
     (this._events[evt] || []).slice().forEach(lsn => lsn(arg));
   }
 }
-class NewSection {
+class BooksSection {
   constructor(data, location) {
     this.data = data;
     this.location = location;
   }
 
-create(){
-  this.location.style.display ='none';
-  
-  const bookTemplate = document.getElementById("book_template").content.querySelector("li");
-  const breakTemplate = document.getElementById("separator_template").content.querySelector("li");
+  create(){
+    this.location.style.display ='none';
+    const bookTemplate = document.getElementById("book_template").content.querySelector("li");
+    const breakTemplate = document.getElementById("separator_template").content.querySelector("li");
 
-  if (this.data.length > 0) {
-    this.data.forEach((item, index) => {
-      index +=1;
-      const book = document.importNode(bookTemplate, true);
-      book.dataset.number = (index).toString();
-      book.querySelector("a").dataset.href = item.cover.large ||'';
-      book.querySelector("img").src = item.cover.small ||'';
-      book.querySelector('.book__title').textContent = item.title ||'';
-      book.querySelector('.author__firstname').textContent ="By" +" " + commonJS.name.getFirstname(item.author)  ||'';
-      book.querySelector('.author__surename').textContent = commonJS.name.getSurname(item.author)  ||'';
-      book.querySelector('.bookInfo__release-date').textContent =" " + item.releaseDate  ||'';
-      book.querySelector('.bookInfo__pages').textContent =" "+ item.pages  ||'';
-      book.querySelector('.bookInfo__shop').href = item.link  ||'';
-      this.location.appendChild(book);
-      index%3 ===0 &&this.location.appendChild(document.importNode(breakTemplate, true));
-    })
-}
-  this.location.style.display ='flex';
-}
-clear(){
-  this.location.style.display ='none';
-  while (this.location.lastChild) {
-    this.location.removeChild(this.location.lastChild);
+    if (this.data.length > 0) {
+      this.data.forEach((item, index) => {
+        index +=1;
+        const book = document.importNode(bookTemplate, true);
+        book.dataset.number = (index).toString();
+        book.querySelector("a").dataset.href = item.cover.large ||'';
+        book.querySelector("img").onload = function(){book.classList.add('activated')};
+        book.querySelector("img").src = item.cover.small ||'';
+        book.querySelector("img").alt = 'cover of book' + item.title ||'';
+        book.querySelector('.book__title').textContent = item.title ||'';
+        book.querySelector('.author__firstname').textContent ="By" +" " + commonJS.name.getFirstname(item.author)  ||'';
+        book.querySelector('.author__surename').textContent = commonJS.name.getSurname(item.author)  ||'';
+        book.querySelector('.bookInfo__release-date').textContent =" " + item.releaseDate  ||'';
+        book.querySelector('.bookInfo__pages').textContent =" "+ item.pages  ||'';
+        book.querySelector('.bookInfo__shop').href = item.link  ||'';
+        this.location.appendChild(book);
+        index%3 ===0 &&this.location.appendChild(document.importNode(breakTemplate, true));
+      })
   }
-  this.location.style.display ='flex';
-  return this;
-}
+    this.location.style.display ='flex';
+  }
+  clear(){
+    this.location.style.display ='none';
+    while (this.location.lastChild) {
+      this.location.removeChild(this.location.lastChild);
+    }
+    this.location.style.display ='flex';
+    return this;
+  }
 }
 
 
@@ -237,7 +231,7 @@ class View extends EventEmitter {
     super();
     this.nodes = nodes;
     this.data = model.getProcessedItems();
-    this.BooksSection = new NewSection(model.getProcessedItems(), this.nodes.booksContainer);
+    this.BooksSection = new BooksSection(model.getProcessedItems(), this.nodes.booksContainer);
     this.showBooks().mountHandlers(this.nodes);
     this.query = model.getData().query;
     this.setFilters();
@@ -317,7 +311,7 @@ class View extends EventEmitter {
   update(data) {
     this.BooksSection.clear();
 
-    this.BooksSection = new NewSection(data.processedBooks, this.nodes.booksContainer);
+    this.BooksSection = new BooksSection(data.processedBooks, this.nodes.booksContainer);
     this.BooksSection.create();
     this.nodes.pageQueryInput.value = data.query.filter;
     this.mountModalTriggers();
@@ -335,10 +329,6 @@ class View extends EventEmitter {
     const errorModal = document.getElementById("errorModal");
     document.getElementById("closeErrorScreen").addEventListener("click", e => this.emit("error_modal_close_clicked", errorModal));
     errorModal.style.display = "flex";
-
-    // this.noBooksModal = new Modal(this.nodes.noBooksScreen, config.noBooksModal);
-    // this.noBooksModal.create();
-    // document.getElementById("closeNoBooksScreen").addEventListener("click", e => this.emit("no_books_modal_close_clicked", this.noBooksModal));
   }
 }
 

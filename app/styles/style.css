@@ -398,6 +398,11 @@ section {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  visibility: hidden;
+}
+
+.book.activated {
+  visibility: visible;
 }
 
 @media screen and (min-width: 1025px) {
@@ -824,8 +829,8 @@ aside {
 }
 
 .fadein {
-  -webkit-animation: fadein 1s ease-in-out;
-          animation: fadein 1s ease-in-out;
+  -webkit-animation: fadein 0.4s ease-in-out;
+          animation: fadein 0.4s ease-in-out;
 }
 
 @-webkit-keyframes fadein {

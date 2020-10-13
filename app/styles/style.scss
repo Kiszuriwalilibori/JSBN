@@ -31,6 +31,8 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  visibility:hidden;
+  &.activated{visibility: visible;}
 
   @media screen and (min-width: 1025px) {
     min-width: calc(#{$imageLength} * 1.74)
@@ -240,7 +242,7 @@ aside {
 }
 
 .fadein {
-  animation: fadein 1s ease-in-out;
+  animation: fadein 0.4s ease-in-out;
 }
 
 @keyframes fadein {

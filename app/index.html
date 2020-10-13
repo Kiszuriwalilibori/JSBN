@@ -25,37 +25,36 @@
                 src="https://covers.oreillystatic.com/images/9780596805531/lrg.jpg"></div>
     </template>
 
-
-<template id='book_template'>
-        <li class="book fadein" data-number="1">
-            <a class="book__cover" data-href="">
-                <img itemprop="image" alt="book cover" class="book__cover__image" src="" loading ='lazy'>
-            </a>
-            <div class="book__informations">
-                <div class="book__informations-titleContainer">
-                    <p class="book__title" itemprop="name"></p>
+    <template id='book_template'>
+            <li class="book fadein" data-number="1">
+                <a class="book__cover" data-href="">
+                    <img itemprop="image" alt="book cover" class="book__cover__image" src="" loading ='lazy'>
+                </a>
+                <div class="book__informations">
+                    <div class="book__informations-titleContainer">
+                        <p class="book__title" itemprop="name"></p>
+                    </div>
+                    <div class="book__details">
+                        <p itemprop="author" class="book__details_author"><span class="author__firstname book__details-author book__details-fixed"></span>
+                            <span class='author__surename book__details-author book__details-variable'></span></p>
+                        <p itemprop="datePublished"><span
+                                class='book__details-small book__details-green book__details-fixed'>Release Date:</span>
+                            <span
+                                class="bookInfo__release-date book__details-small book__details-green book__details-variable"></span>
+                        </p>
+                        <p itemprop="numberOfPages"><span
+                                class='book__details-small book__details-green book__details-fixed'>Pages:</span><span
+                                class='bookInfo__pages book__details-small book__details-green book-details__variable'></span>
+                        </p>
+                        <p itemprop="discussionUrl"><span
+                                class='book__details-small book__details-green book__details-fixed'>Link:</span> <a
+                                class='bookInfo__shop book__details-small book__details-red book__details-variable'
+                                href="http://shop.oreilly.com/product/9780596517748.do">shop</a></p>
+                    </div>
                 </div>
-                <div class="book__details">
-                    <p itemprop="author" class="book__details_author"><span class="author__firstname book__details-author book__details-fixed"></span>
-                        <span class='author__surename book__details-author book__details-variable'></span></p>
-                    <p itemprop="datePublished"><span
-                            class='book__details-small book__details-green book__details-fixed'>Release Date:</span>
-                        <span
-                            class="bookInfo__release-date book__details-small book__details-green book__details-variable"></span>
-                    </p>
-                    <p itemprop="numberOfPages"><span
-                            class='book__details-small book__details-green book__details-fixed'>Pages:</span><span
-                            class='bookInfo__pages book__details-small book__details-green book-details__variable'></span>
-                    </p>
-                    <p itemprop="discussionUrl"><span
-                            class='book__details-small book__details-green book__details-fixed'>Link:</span> <a
-                            class='bookInfo__shop book__details-small book__details-red book__details-variable'
-                            href="http://shop.oreilly.com/product/9780596517748.do">shop</a></p>
-                </div>
-            </div>
-        </li>
-   
-</template>
+            </li>
+    
+    </template>
 
 <template id = 'separator_template'>
     <li class ='separator'>
@@ -98,7 +97,7 @@
                 <button id='resetButton' class="resetButton hvr-pulse-grow" type='reset'>Wyczyść</button>
             </form>
         </aside>
-
+        
         <section>
             <ol id='booksContainer' class ='container-for-books'>
             </ol>
