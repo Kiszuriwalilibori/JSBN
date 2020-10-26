@@ -276,6 +276,9 @@ class View extends EventEmitter {
     const modal = document.getElementById("myModal");
     document.getElementById("book_modal_image").src = x.dataset.href;
     modal.style.display = "flex";
+    modal.style.visibility = 'visible';
+    console.log(modal);
+
     document.getElementById("close").addEventListener("click", e => this.emit("book_modal_close_clicked", modal));
   }
 

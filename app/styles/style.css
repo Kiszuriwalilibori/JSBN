@@ -188,6 +188,9 @@
 /*Modal with small image */
 .myModal {
   position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   z-index: 100;
   left: 0;
   top: 0;
@@ -245,7 +248,7 @@
 
 .myModal__close:hover,
 .myModal__close :focus {
-  color: #000;
+  color: red;
   text-decoration: none;
   cursor: pointer;
 }

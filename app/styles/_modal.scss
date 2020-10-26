@@ -1,7 +1,8 @@
 
   /*Modal with small image */
   .myModal{
-    position: fixed;
+    position:fixed;
+    display:flex;
     z-index: 100;
     left: 0;
     top: 0;
@@ -46,7 +47,7 @@
   
     &:hover,
     :focus {
-      color: #000;
+      color: red;
       text-decoration: none;
       cursor: pointer;
     }
